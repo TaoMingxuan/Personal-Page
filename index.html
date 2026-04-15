@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏策划作品集 | 你的名字</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eee;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 头部信息 */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, #ffd89b, #c7e9fb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .subtitle {
+            color: #a0a0b0;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-links a {
+            color: #ffd89b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            transition: 0.2s;
+        }
+
+        .contact-links a:hover {
+            background: rgba(255,216,155,0.2);
+        }
+
+        /* 标签页导航 */
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: #aaa;
+            font-size: 1.1rem;
+            padding: 0.8rem 1.8rem;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            background: #ffd89b;
+            color: #1a1a2e;
+        }
+
+        /* 标签页内容容器 */
+        .tab-content {
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 作品卡片网格 */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .work-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border-color: rgba(255,216,155,0.3);
+        }
+
+        .work-card video, .work-card img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+            background: #0a0a1a;
+        }
+
+        .work-info {
+            padding: 1.2rem;
+        }
+
+        .work-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #ffd89b;
+        }
+
+        .work-info .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.8rem 0;
+        }
+
+        .work-info .tag {
+            background: rgba(255,216,155,0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            color: #ffd89b;
+        }
+
+        .work-info p {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .design-note {
+            font-size: 0.85rem;
+            color: #aaa;
+            border-left: 3px solid #ffd89b;
+            padding-left: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* 设计文档区域 */
+        .doc-section {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .doc-section h3 {
+            color: #ffd89b;
+            margin-bottom: 1rem;
+        }
+
+        .design-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .design-image img {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            .tab-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            .work-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>🎮 你的名字</h1>
+        <div class="subtitle">游戏策划 · 玩法设计 · 系统策划</div>
+        <div class="contact-links">
+            <a href="#">📧 your.email@example.com</a>
+            <a href="#">💬 牛客网主页</a>
+            <a href="#">📄 下载简历PDF</a>
+        </div>
+    </div>
+
+    <!-- 标签页导航栏 -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="games">🎯 游戏作品</button>
+        <button class="tab-btn" data-tab="design">📐 设计文档</button>
+        <button class="tab-btn" data-tab="about">👤 关于我</button>
+    </div>
+
+    <!-- 标签页内容区 -->
+    <div class="tab-content">
+        <!-- 游戏作品标签页 -->
+        <div id="games" class="tab-pane active">
+            <div class="work-grid">
+                <!-- 作品卡片 1 -->
+                <div class="work-card">
+                    <video controls poster="https://placehold.co/640x360/1a1a2e/ffd89b?text=游戏封面">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                        您的浏览器不支持 video 标签。
+                    </video>
+                    <div class="work-info">
+                        <h3>末日避难所 · 资源管理</h3>
+                        <div class="tags">
+                            <span class="tag">系统策划</span>
+                            <span class="tag">数值设计</span>
+                            <span class="tag">Excel建模</span>
+                        </div>
+                        <p>一款末日背景下的资源分配决策游戏。玩家需要在有限的物资中做出取舍，影响幸存者营地的存亡。</p>
+                        <div class="design-note">
+                            💡 设计亮点：基于多轮玩家测试，迭代了3版资源产出曲线，使难度曲线更平滑。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品卡片 2 -->
+                <div class="work-card">
+                    <img src="https://picsum.photos/id/104/640/360" alt="游戏截图2">
+                    <div class="work-info">
+                        <h3>光影迷城 · 解谜游戏</h3>
+                        <div class="tags">
+                            <span class="tag">关卡设计</span>
+                            <span class="tag">机制设计</span>
+                            <span class="tag">原型测试</span>
+                        </div>
+                        <p>利用光线反射与遮挡的解谜游戏，共设计12个关卡，难度呈阶梯式上升。</p>
+                        <div class="design-note">
+                            💡 设计文档包含：机制说明、关卡白盒原型图、用户测试反馈分析。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 作品卡片 3 -->
+                <div class="work-card">
+                    <img src="https://picsum.photos/id/26/640/360" alt="游戏截图3">
+                    <div class="work-info">
+                        <h3>卡牌构筑 · 自走棋玩法Demo</h3>
+                        <div class="tags">
+                            <span class="tag">战斗设计</span>
+                            <span class="tag">平衡性调整</span>
+                        </div>
+                        <p>自走棋like卡牌构筑原型，设计6个职业、30张卡牌，包含数值平衡表。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 设计文档标签页 -->
+        <div id="design" class="tab-pane">
+            <div class="doc-section">
+                <h3>📊 系统策划案 · 经济系统设计</h3>
+                <p>为一款模拟经营游戏设计的资源循环系统，包含货币产出/消耗模型、数值验证表格。</p>
+                <div class="design-image">
+                    <img src="https://picsum.photos/id/20/800/450" alt="经济系统流程图">
+                    <p style="font-size: 0.8rem; color: #888;">图：资源循环流程图（示意）</p>
+                </div>
+            </div>
+
+            <div class="doc-section">
+                <h3>📐 关卡设计 · 白盒原型</h3>
+                <p>解谜游戏《光影迷城》的前3关白盒设计稿，包含玩家路径、光源位置、谜题触发逻辑。</p>
+                <div class="design-image">
+                    <img src="https://picsum.photos/id/15/800/450" alt="关卡白盒">
+                </div>
+            </div>
+
+            <div class="doc-section">
+                <h3>📈 数值设计 · 战斗公式与成长曲线</h3>
+                <p>卡牌游戏的伤害计算公式推导过程，以及各等级预期数值表（附Excel截图）。</p>
+                <div class="design-image">
+                    <img src="https://picsum.photos/id/0/800/450" alt="数值表格">
+                </div>
+                <div class="design-note" style="margin-top: 0.8rem;">
+                    📎 完整数值表.xlsx 可联系我获取 / 或在GitHub仓库中查看。
+                </div>
+            </div>
+        </div>
+
+        <!-- 关于我标签页 -->
+        <div id="about" class="tab-pane">
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 200px;">
+                    <img src="https://picsum.photos/id/64/300/300" alt="头像" style="width: 100%; max-width: 200px; border-radius: 50%; margin-bottom: 1rem;">
+                </div>
+                <div style="flex: 3;">
+                    <h3>关于我</h3>
+                    <p>🎓 毕业于XX大学，数字媒体技术专业。热爱玩法创新与系统设计。</p>
+                    <p>🎮 游戏经历：10年+核心玩家，深度体验《塞尔达传说》《黑暗之魂》《杀戮尖塔》等作品，擅长拆解设计逻辑。</p>
+                    <p>🛠️ 工具链：Excel/Google Sheets（数值建模）、Axure/Figma（原型图）、Unity基础、Git版本管理。</p>
+                    <p>📌 正在求职：游戏策划（系统/数值/关卡方向），接受实习/校招/初级岗位。</p>
+                    <div class="contact-links" style="justify-content: flex-start; margin-top: 1.5rem;">
+                        <a href="#">📧 联系我</a>
+                        <a href="#">🔗 GitHub</a>
+                        <a href="#">📄 简历下载</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 标签页切换逻辑
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    function switchTab(tabId) {
+        // 隐藏所有内容
+        tabPanes.forEach(pane => {
+            pane.classList.remove('active');
+        });
+        // 移除所有按钮的active样式
+        tabBtns.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        // 显示选中的内容
+        const targetPane = document.getElementById(tabId);
+        if (targetPane) {
+            targetPane.classList.add('active');
+        }
+        // 高亮对应的按钮
+        const activeBtn = Array.from(tabBtns).find(btn => btn.dataset.tab === tabId);
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+        }
+    }
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.dataset.tab;
+            switchTab(tabId);
+        });
+    });
+</script>
+</body>
+</html>
