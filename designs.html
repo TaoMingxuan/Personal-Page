@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策划案列表 | 陶明轩</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← 返回首页</a>
+
+    <div class="header" style="margin-bottom: 1.5rem;">
+        <h1>📄 游戏策划案</h1>
+        <div class="subtitle">深度拆解玩法机制与设计逻辑</div>
+    </div>
+
+    <div class="view-toggle">
+        <button class="view-btn active" data-view="card">📷 卡片模式</button>
+        <button class="view-btn" data-view="list">📋 列表模式</button>
+    </div>
+
+    <div id="analysis-container" class="work-grid"></div>
+</div>
+
+<script>
+    const analysisData = [
+        {
+            id: "roguelike",
+            title: "《杀戮尖塔》卡牌构筑拆解",
+            tags: ["玩法拆解", "数值分析", "Roguelike"],
+            desc: "深度拆解其卡牌构筑系统的设计逻辑、卡牌平衡与成长曲线。",
+            thumbnail: "https://picsum.photos/id/0/640/360",
+            detailLink: "analysis-detail-roguelike.html"
+        },
+        {
+            id: "zelda",
+            title: "《塞尔达传说》引导设计拆解",
+            tags: ["关卡设计", "引导系统", "开放世界"],
+            desc: "分析其如何通过视觉引导和兴趣点布局实现无指引探索。",
+            thumbnail: "https://picsum.photos/id/104/640/360",
+            detailLink: "analysis-detail-zelda.html"
+        },
+        {
+            id: "hades",
+            title: "《Hades》叙事与玩法融合拆解",
+            tags: ["叙事设计", "Roguelite", "角色设计"],
+            desc: "拆解其如何将死亡循环机制与剧情推进深度绑定。",
+            thumbnail: "https://picsum.photos/id/106/640/360",
+            detailLink: "analysis-detail-hades.html"
+        }
+    ];
+
+    function renderCardMode() {
+        const container = document.getElementById('analysis-container');
+        container.className = 'work-grid';
+        container.innerHTML = analysisData.map(item => `
+            <a href="${item.detailLink}" class="work-card-link">
+                <div class="work-card">
+                    <img src="${item.thumbnail}" alt="${item.title}">
+                    <div class="work-info">
+                        <h3>${item.title}</h3>
+                        <div class="tags">
+                            ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <p>${item.desc}</p>
+                    </div>
+                </div>
+            </a>
+        `).join('');
+    }
+
+    function renderListMode() {
+        const container = document.getElementById('analysis-container');
+        container.className = 'list-view';
+        container.innerHTML = analysisData.map(item => `
+            <a href="${item.detailLink}" class="list-item">
+                <div class="list-item-thumb">
+                    <img src="${item.thumbnail}" alt="${item.title}">
+                </div>
+                <div class="list-item-info">
+                    <h3>${item.title}</h3>
+                    <div class="tags">
+                        ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                    <p>${item.desc}</p>
+                </div>
+            </a>
+        `).join('');
+    }
+
+    let currentView = 'card';
+    const viewBtns = document.querySelectorAll('.view-btn');
+
+    function switchView(view) {
+        currentView = view;
+        if (view === 'card') renderCardMode();
+        else renderListMode();
+        viewBtns.forEach(btn => {
+            const btnView = btn.getAttribute('data-view');
+            if (btnView === view) btn.classList.add('active');
+            else btn.classList.remove('active');
+        });
+    }
+
+    viewBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchView(btn.getAttribute('data-view')));
+    });
+
+    renderCardMode();
+</script>
+</body>
+</html>

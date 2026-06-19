@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏Demo列表 | 陶明轩</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← 返回首页</a>
+
+    <div class="header">
+        <h1>🎮 游戏Demo列表</h1>
+        <div class="subtitle">点击卡片查看完整设计文档</div>
+    </div>
+
+    <div class="view-toggle">
+        <button class="view-btn active" data-view="card">📷 卡片模式</button>
+        <button class="view-btn" data-view="list">📋 列表模式</button>
+    </div>
+
+    <div id="games-container"></div>
+</div>
+
+<script>
+    // ============================================================
+    // 👇👇👇 在这里手动填写你的游戏数据 👇👇👇
+    // ============================================================
+    const gamesData = [
+        {
+            title: "超市模拟器·模拟经营Demo",
+            tags: ["合作项目","关卡设计","合作解谜","双人"],
+            desc: "一款中式题材的双人合作解谜游戏，两位玩家需要分别控制阴阳两种力量。",
+            thumbnail: "Games/超市模拟器/超市模拟器.png",
+            link: "Games/符影双生/202604_符影双生.html"
+        },
+        {
+            title: "符影双生·合作解谜Demo",
+            tags: ["个人项目","关卡设计","玩法设计","合作解谜","双人同屏"],
+            desc: "一款中式题材的双人合作解谜游戏，两位玩家需要分别控制阴阳两种力量。",
+            thumbnail: "Games/符影双生/符影双生效果图.png",
+            link: "Games/符影双生/202604_符影双生.html"
+        },
+        {
+            title: "秘密入侵·技能FPSDemo",
+            tags: ["个人项目","任务设计","技能设计","FPS"],
+            desc: "一款第一人称潜入与战术射击结合的单人游戏。玩家将潜入敌方的实验基地，获取相关情报，并摧毁相关设施。",
+            thumbnail: "Games/秘密入侵/秘密入侵.png",
+            link: "Games/秘密入侵/202602_秘密入侵.html"
+        }
+    ];
+    // ============================================================
+
+    let currentView = 'card';
+
+    function escapeHtml(str) {
+        if (!str) return '';
+        return str.replace(/[&<>]/g, function(m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+        });
+    }
+
+    function renderCardMode() {
+        const container = document.getElementById('games-container');
+        container.className = 'work-grid';
+        container.innerHTML = gamesData.map(game => `
+            <a href="${game.link}" class="work-card-link">
+                <div class="work-card">
+                    <img src="${game.thumbnail}" alt="${escapeHtml(game.title)}" onerror="this.src='https://picsum.photos/640/360?random=1'">
+                    <div class="work-info">
+                        <h3>${escapeHtml(game.title)}</h3>
+                        <div class="tags">
+                            ${game.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+                        </div>
+                        <p>${escapeHtml(game.desc)}</p>
+                    </div>
+                </div>
+            </a>
+        `).join('');
+    }
+
+    function renderListMode() {
+        const container = document.getElementById('games-container');
+        container.className = 'list-view';
+        container.innerHTML = gamesData.map(game => `
+            <a href="${game.link}" class="list-item">
+                <div class="list-item-thumb">
+                    <img src="${game.thumbnail}" alt="${escapeHtml(game.title)}" onerror="this.src='https://picsum.photos/120/90?random=1'">
+                </div>
+                <div class="list-item-info">
+                    <h3>${escapeHtml(game.title)}</h3>
+                    <div class="tags">
+                        ${game.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+                    </div>
+                    <p>${escapeHtml(game.desc)}</p>
+                </div>
+            </a>
+        `).join('');
+    }
+
+    function renderCurrentView() {
+        if (currentView === 'card') {
+            renderCardMode();
+        } else {
+            renderListMode();
+        }
+    }
+
+    function switchView(view) {
+        currentView = view;
+        renderCurrentView();
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            const btnView = btn.getAttribute('data-view');
+            if (btnView === view) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+    }
+
+    document.querySelectorAll('.view-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            switchView(btn.getAttribute('data-view'));
+        });
+    });
+
+    // 初始渲染
+    renderCardMode();
+</script>
+</body>
+</html>
