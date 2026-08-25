@@ -8,6 +8,13 @@
 </head>
 <body>
 <div class="container">
+    <!-- 页眉 -->
+ <div style="position: absolute; left: 20px; color: #ffffff; font-size: 14px; opacity: 0.5; user-select: none; z-index: 999;">
+        最后更新：2026年06月30日
+ </div>
+ <div style="position: absolute; right: 20px; color: #ffffff; font-size: 14px; opacity: 0.5; user-select: none; z-index: 999;">
+        过往项目持续整理中。。。
+ </div>
     <!-- 抬头 -->
     <div class="header">
         <h1>🎮 陶明轩</h1>
@@ -21,7 +28,7 @@
 
     <!-- 三个导航按钮 -->
     <div class="nav-buttons">
-        <a href="games.html" class="nav-btn">🎮 游戏Demo列表</a>
+        <a href="games.html" class="nav-btn">🎮 游戏Demo列表</a> 
         <a href="designs.html" class="nav-btn"> 📄 策划案列表</a>
         <a href="analysis.html" class="nav-btn">🛠 拆解案列表</a>
         <a href="about.html" class="nav-btn primary">👤 关于我</a>
@@ -30,19 +37,6 @@
     <!-- 三个最新项目 -->
     <h2 class="section-title">✨ 最新项目</h2>
     <div id="latest-projects" class="work-grid"></div>
-
-    <div style="
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        color: #ffffff;
-        font-size: 14px;
-        opacity: 0.5;
-        user-select: none;
-        z-index: 999;
-    ">
-        最后更新：2026年06月12日
-    </div>
 
 </div>
     <script>
@@ -66,9 +60,9 @@
         },
         {
             title: "《明日方舟：终末地》养成系统拆解",
-            tags: ["玩法拆解", "数值分析","养成系统"],
-            desc: "深度拆解其卡牌构筑系统的设计逻辑与平衡性。",
-            thumbnail: "https://picsum.photos/id/0/640/360",
+            tags: ["系统拆解", "养成系统", "二游"],
+            desc: "对《明日方舟：终末地》的养成系统进行系统化拆解，分析角色成长、资源循环及工业与战斗系统的耦合设计，总结其长线养成与低焦虑体验的设计思路",
+            thumbnail: "PDFs/Analysis/明日方舟终末地/养成系统拆解.png",
             link: "PDFs/Analysis/明日方舟终末地/202603_养成系统拆解案.pdf"
         }
     ];

@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ========== 元数据（列表页会自动读取这些） ========== -->
+    <meta name="game-title" content="R00T.5">
+    <meta name="game-tags" content="节奏探索,蒸汽朋克,Game Jam,UE4蓝图,单人操控">
+    <meta name="game-desc" content="Global Game Jam 2025 72小时4人团队节奏探索游戏，操控采矿机器人跟随节拍挖掘地下收集种子。">
+    <meta name="game-thumb" content="Games/R00T.5/R00T.5效果图.png">
+    <meta name="game-date" content="202302">
+    <!-- ================================================= -->
+    
+    <title>R00T.5 · GameJam项目</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <style>
+        .media-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 24px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .media-section video, .media-section img {
+            max-width: 100%;
+            border-radius: 16px;
+        }
+        .media-section video {
+            display: block;
+        }
+        .content-block {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        .content-block h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 0.8rem;
+        }
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .highlight-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+        .highlight-card p {
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+        .info-list {
+            margin-left: 1.5rem;
+            margin-top: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .media-caption {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        .screenshot-carousel {
+          width:100%;
+          /*max-width:900px;*/
+          margin:0 auto;
+          overflow:hidden;
+          position: relative; /* ✅关键：给absolute按钮做定位容器 */
+        }
+        .carousel-track {
+          display:flex;
+        }
+        .carousel-slide {
+          flex:0 0 100%;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          /* 给slide一点上下内边距，防止图片贴边碰到按钮 */
+          padding: 0 3rem;
+          box-sizing: border-box;
+        }
+        .carousel-slide img {
+          display:block;
+          max-width:100%;
+          max-height:70vh;
+          width:auto;
+          height:auto;
+          object-fit:contain;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: background 0.2s ease, transform 0.2s ease;
+            z-index: 20; /* 提高z-index，防止被其他元素遮挡 */
+        }
+        .carousel-button:hover {
+            background: rgba(0,0,0,0.72);
+            transform: translateY(-50%) scale(1.04);
+        }
+        .carousel-button.prev {
+            left: 0.5rem;
+        }
+        .carousel-button.next {
+            right: 0.5rem;
+        }
+        .carousel-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 0.8rem;
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.4rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.45);
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.45);
+            cursor: pointer;
+        }
+        .carousel-dot.active {
+            background: var(--accent);
+        }
+        @media (max-width: 640px) {
+            .carousel-button {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+            }
+            .carousel-button.prev {
+                left: 0.3rem;
+            }
+            .carousel-button.next {
+                right: 0.3rem;
+            }
+            .carousel-slide {
+                padding:0 2.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../../games.html" class="back-link">← 返回游戏列表</a>
+    <div class="game-header" style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), #c7e9fb); -webkit-background-clip: text; background-clip: text; color: transparent;">R00T.5 -- 蒸汽朋克节奏探索</h1>
+        <div class="tags" style="justify-content: center;">
+            <span class="tag">Global Game Jam 2023</span>
+            <span class="tag">72h Game Jam</span>
+            <span class="tag">4人团队</span>
+            <span class="tag">主策划/唯一程序</span>
+            <span class="tag">2023.02</span>
+        </div>
+    </div>
+    <!-- PV视频区 -->
+    <div class="media-section">
+        <video 
+            src="../../Games/R00T.5/R00T.5_PV.mp4" 
+            controls 
+            style="width: 100%; height: 100%; object-fit: cover;"
+        >
+            浏览器不支持视频播放，请更换浏览器查看
+        </video>
+        <div style="font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem;">🎬 游戏实机演示视频 · 完整Gameplay流程展示</div>
+    </div>
+   <!-- 截图轮播 -->
+    <div class="media-section">
+        <div class="screenshot-carousel" data-carousel>
+            <div class="carousel-track" data-carousel-track>
+                <div class="carousel-slide">
+                    <img src="../../Games/R00T.5/R00T.5效果图.png" alt="《R00T.5》效果图">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../../Games/R00T.5/Assets.png" alt="《R00T.5》素材图">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../../Games/R00T.5/界面设计图.jpg" alt="《R00T.5》界面设计图">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../../Games/R00T.5/关卡设计图.jpg" alt="《R00T.5》关卡设计图">
+                </div>
+            </div>
+            <button class="carousel-button prev" type="button" data-carousel-prev aria-label="上一张">‹</button>
+            <button class="carousel-button next" type="button" data-carousel-next aria-label="下一张">›</button>
+            <div class="carousel-dots" aria-label="截图页码" data-carousel-dots></div>
+        </div>
+        <div class="media-caption">🖼 游戏内截图</div>
+    </div>
+    <!-- 实机视频区 -->
+    <div class="media-section">
+        <video 
+            src="../../Games/R00T.5/R00T.5_Gameplay.mp4" 
+            controls 
+            style="width: 100%; height: 100%; object-fit: cover;"
+        >
+            浏览器不支持视频播放，请更换浏览器查看
+        </video>
+        <div style="font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem;">🎬 游戏实机演示视频 · 完整Gameplay流程展示</div>
+    </div>
+    <!-- 设计概述 -->
+    <div class="content-block">
+        <h2>📖 项目简介</h2>
+        <p>R00T.5 是 Global Game Jam 2025 参赛作品，一款以主题「Roots」为核心打造的蒸汽朋克节奏探索游戏。玩家将操控一台被废弃多年的采矿机器人R00T.5，不再挖掘矿石，转而深入地下寻找深埋地底的生命种子。游戏要求玩家跟随音乐节拍移动，在限时内探索地下区域、激活机械装置、收集全部种子，逐步揭开冰冷钢铁世界下残存的生命痕迹。</p>
+        <p style="margin-top: 0.8rem;">🎯 核心体验：节拍同步移动、地下挖掘探索、限时收集闯关、蒸汽朋克暗黑地下氛围。</p>
+    </div>
+    <!-- 担任角色与职责拆分 -->
+    <div class="content-block">
+        <h2>👥 个人定位与分工</h2>
+        <div class="highlights-grid">
+            <div class="highlight-card">
+                <strong>📝 主策划</strong>
+                <p style="font-size: 0.85rem; margin-top: 0.3rem;">主导整体玩法、系统、关卡设计，把控全流程游戏体验，根据试玩持续迭代优化。</p>
+            </div>
+            <div class="highlight-card">
+                <strong>💻 唯一程序（UE4 Blueprint）</strong>
+                <p style="font-size: 0.85rem; margin-top: 0.3rem;">独立完成全部Gameplay蓝图开发，实现节拍、移动、交互、UI、流程全套游戏逻辑。</p>
+            </div>
+        </div>
+    </div>
+    <!-- 详细工作职责 -->
+    <div class="content-block">
+        <h2>📋 我的职责</h2>
+        <h3 style="margin-top:0.5rem;color:var(--accent);">游戏策划</h3>
+        <ul style="margin-left: 1.5rem; margin-top: 0.8rem; color: var(--text-secondary);">
+            <li>提出「地下挖掘探索」作为游戏核心表现载体</li>
+            <li>协同团队敲定「跟随节拍移动」作为核心玩法机制</li>
+            <li>搭建完整游戏核心循环，设计种子收集、机械机关、限时胜利判定等系统</li>
+            <li>负责整张地下地图布局设计，把控探索节奏与玩家动线</li>
+            <li>基于多轮试玩反馈迭代调整关卡、引导与操作手感</li>
+        </ul>
+        <h3 style="margin-top:1.2rem;color:var(--accent);">Gameplay程序（UE4蓝图）</h3>
+        <ul style="margin-left: 1.5rem; margin-top: 0.8rem; color: var(--text-secondary);">
+            <li>节拍同步系统、精准节拍输入判定逻辑</li>
+            <li>机器人玩家移动、地下挖掘动作系统</li>
+            <li>地下机关交互、种子拾取收集逻辑</li>
+            <li>全套游戏UI界面与状态展示</li>
+            <li>全局游戏流程、计时、胜负控制模块</li>
+            <li>摄像机跟随、角色动画驱动逻辑</li>
+        </ul>
+    </div>
+    <!-- 设计过程 -->
+    <div class="content-block">
+        <h2>🛠 设计过程</h2>
+        <h3 style="margin-top:0.5rem;color:var(--accent);">从GameJam主题到核心玩法</h3>
+        <p>本次Game Jam给定主题为 Roots。初期我确定以地下深挖作为游戏核心视觉与游玩载体，让玩家持续向下探索搜寻隐藏目标；团队讨论后参考《节奏地牢》移动逻辑，融合节拍操作与地下探索，形成独有的节奏挖掘体验。节拍判定窗口经过多轮试玩、参数微调，最终敲定适配大众的操作手感区间。</p>
+
+        <h3 style="margin-top:1.2rem;color:var(--accent);">72小时开发范围取舍（Scope Management）</h3>
+        <p>受限于极短开发周期，项目两次主动删减非核心功能，保障基础玩法完整交付：</p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.8rem; color: var(--text-secondary);">
+            <li><strong>探测器系统（废弃）</strong>：原计划通过音效、动画提示种子与机关方位，解决迷路问题；但开发bug多、挤占核心功能工期，选择暂停开发，优先保证节拍、挖掘、收集基础循环。</li>
+            <li><strong>程序化随机地图PCG（废弃）</strong>：初期规划随机生成地下地图提升重复游玩性；评估后判定规则、生成逻辑开发成本过高，改为人工手绘固定关卡，降低开发压力。</li>
+        </ul>
+
+        <h3 style="margin-top:1.2rem;color:var(--accent);">人工关卡设计与玩法迭代</h3>
+        <p>切换人工造关后重新规划地下地图动线，针对性引导玩家行为：</p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.8rem; color: var(--text-secondary);">
+            <li>利用玩家本能向下探索的习惯，刻意放置一颗种子于地图上层，倒逼玩家反向折返探索，丰富探索路径；</li>
+            <li>机关排布制造时间压力，让玩家在限时、探索、收集之间做出取舍；</li>
+        </ul>
+        <p>小规模试玩验证了前期预判：玩家极易丢失目标、缺少空间引导。随即重新调整种子分布、地图通道结构、机关排布，大幅优化玩家寻路与探索流畅度，形成最终提交版本。</p>
+    </div>
+    <!-- 项目总结 -->
+    <div class="content-block">
+        <h2>📌 项目总结</h2>
+        <p>本次72小时Game Jam完整产出可通关可展示游戏原型，积累高强度快速协同开发实战经验。项目周期内独立包揽玩法构思、系统规划、关卡设计与全套Gameplay蓝图开发，依靠持续试玩迭代，在有限时间平衡开发工作量与玩家游玩体验。</p>
+        <p style="margin-top:0.8rem;">项目收获总结：</p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.8rem; color: var(--text-secondary);">
+            <li>掌握短周期项目 Scope Management（开发范围管控），懂得取舍非核心功能保障交付；</li>
+            <li>学会用小规模试玩验证设计猜想，提前预判玩家痛点；</li>
+            <li>建立以玩家体验为核心的迭代思路，持续优化关卡与核心机制；</li>
+            <li>打通策划与程序一体化工作流，快速完成设计落地与验证。</li>
+        </ul>
+    </div>
+    <!-- 底部 -->
+    <div style="text-align: center; padding: 2rem 0;">
+        <a href="../../games.html" class="back-link" style="margin-bottom: 0;">← 返回游戏列表</a>
+    </div>
+    <script>
+    document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+        const track = carousel.querySelector('[data-carousel-track]');
+        const slides = Array.from(track.children);
+        const prevButton = carousel.querySelector('[data-carousel-prev]');
+        const nextButton = carousel.querySelector('[data-carousel-next]');
+        const dotsWrap = carousel.querySelector('[data-carousel-dots]');
+        let currentIndex = 0;
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot';
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `查看第 ${index + 1} 张截图`);
+            dot.addEventListener('click', () => updateCarousel(index));
+            dotsWrap.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsWrap.children);
+
+        function updateCarousel(index) {
+            currentIndex = (index + slides.length) % slides.length;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('active', dotIndex === currentIndex);
+            });
+        }
+
+        prevButton.addEventListener('click', () => updateCarousel(currentIndex - 1));
+        nextButton.addEventListener('click', () => updateCarousel(currentIndex + 1));
+        updateCarousel(0);
+    });
+</script>
+</div>
+</body>
+</html>
