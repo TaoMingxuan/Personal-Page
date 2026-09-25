@@ -5,19 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>拆解案列表 | 陶明轩</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project.css">
 </head>
-<body>
-<div class="container">
-    <a href="index.html" class="back-link">← 返回首页</a>
+<body class="catalog-page games-catalog document-catalog">
+<div class="container games-shell">
+    <nav class="site-nav" aria-label="主导航">
+        <a class="site-nav__brand" href="index.html"><span class="site-nav__mark">T</span><span>陶明轩 <small>GAME DESIGN</small></span></a>
+        <div class="site-nav__links"><a href="games.html"><span>↗</span>游戏原型</a><a href="designs.html"><span>↗</span>策划案</a><a href="analysis.html"><span>↗</span>系统拆解</a><a href="about.html"><span>↗</span>关于我</a></div>
+    </nav>
+    <a href="index.html" class="back-link">← 首页 / 项目目录</a>
 
-    <div class="header" style="margin-bottom: 1.5rem;">
-        <h1>🛠 游戏拆解案</h1>
-        <div class="subtitle">深度拆解玩法机制与设计逻辑</div>
+    <div class="header catalog-header games-header">
+        <div>
+        <p class="project-kicker">SYSTEM RESEARCH / 2026</p>
+        <h1>系统拆解</h1>
+        <div class="subtitle">从玩家体验出发，拆解成长、资源和长期循环背后的设计逻辑。</div>
+        </div>
+        <p class="games-header__note">通过拆分系统目标、资源流和玩家决策，理解一个长线体验为什么能够持续运转。</p>
     </div>
 
-    <div class="view-toggle">
-        <button class="view-btn active" data-view="card">📷 卡片模式</button>
-        <button class="view-btn" data-view="list">📋 列表模式</button>
+    <section class="games-overview" aria-label="系统拆解概览">
+        <div><strong>01</strong><span>文档总数</span></div>
+        <div><strong>01</strong><span>养成系统</span></div>
+        <div><strong>01</strong><span>二游案例</span></div>
+        <div><strong>2026</strong><span>最近更新</span></div>
+    </section>
+
+    <div class="games-toolbar">
+        <p><span>INDEX / 03</span> 按案例查看系统目标、资源与长线循环</p>
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="card">卡片模式</button>
+            <button class="view-btn" data-view="list">列表模式</button>
+        </div>
     </div>
 
     <div id="analysis-container" class="work-grid"></div>
@@ -28,6 +47,9 @@
         {
             id: "终末地养成",
             title: "《明日方舟：终末地》养成系统拆解",
+            status: "PDF 文档",
+            year: "2026",
+            format: "养成系统 · 二游",
             tags: ["系统拆解", "养成系统", "二游"],
             desc: "对《明日方舟：终末地》的养成系统进行系统化拆解，分析角色成长、资源循环及工业与战斗系统的耦合设计，总结其长线养成与低焦虑体验的设计思路",
             thumbnail: "PDFs/Analysis/明日方舟终末地/养成系统拆解.png",
@@ -38,11 +60,12 @@
     function renderCardMode() {
         const container = document.getElementById('analysis-container');
         container.className = 'work-grid';
-        container.innerHTML = analysisData.map(item => `
+        container.innerHTML = analysisData.map((item, index) => `
             <a href="${item.detailLink}" class="work-card-link">
                 <div class="work-card">
                     <img src="${item.thumbnail}" alt="${item.title}">
                     <div class="work-info">
+                        <div class="work-card__meta"><span>${String(index + 1).padStart(2, '0')}</span><span>${item.year} · ${item.format}</span><b>${item.status}</b></div>
                         <h3>${item.title}</h3>
                         <div class="tags">
                             ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
@@ -57,12 +80,13 @@
     function renderListMode() {
         const container = document.getElementById('analysis-container');
         container.className = 'list-view';
-        container.innerHTML = analysisData.map(item => `
+        container.innerHTML = analysisData.map((item, index) => `
             <a href="${item.detailLink}" class="list-item">
                 <div class="list-item-thumb">
                     <img src="${item.thumbnail}" alt="${item.title}">
                 </div>
                 <div class="list-item-info">
+                    <div class="list-item__meta"><span>${String(index + 1).padStart(2, '0')}</span><span>${item.year} · ${item.format}</span><b>${item.status}</b></div>
                     <h3>${item.title}</h3>
                     <div class="tags">
                         ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}

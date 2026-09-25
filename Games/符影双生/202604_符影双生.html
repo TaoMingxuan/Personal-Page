@@ -1,189 +1,139 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- ========== 元数据（列表页会自动读取这些） ========== -->
     <meta name="game-title" content="《符影双生》">
     <meta name="game-tags" content="合作解谜,关卡设计,双人分屏,中式题材">
     <meta name="game-desc" content="一款中式题材的双人合作解谜游戏。两位玩家需要分别控制阴阳两种力量，共同解开机关。">
     <meta name="game-thumb" content="Games/符影双生/符影双生效果图.png">
     <meta name="game-date" content="202604">
-    <!-- ================================================= -->
-    
-    <title>《符影双生》 · 个人项目</title>
+    <title>《符影双生》｜游戏策划项目</title>
     <link rel="stylesheet" href="../../css/style.css">
-    
-    <style>
-        .media-section {
-            background: rgba(0,0,0,0.3);
-            border-radius: 24px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        .media-section video, .media-section img {
-            max-width: 100%;
-            border-radius: 16px;
-        }
-        .content-block {
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border);
-        }
-        .content-block h2 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            border-left: 3px solid var(--accent);
-            padding-left: 0.8rem;
-        }
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .highlight-card {
-            background: rgba(255,255,255,0.03);
-            border-radius: 16px;
-            padding: 1rem;
-            border-left: 3px solid var(--accent);
-        }
-        .role-box {
-            background: rgba(255,216,155,0.1);
-            border-radius: 16px;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-        .role-title {
-            color: var(--accent);
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="../../css/project.css">
 </head>
-<body>
-<div class="container">
-    <a href="../../games.html" class="back-link">← 返回游戏列表</a>
+<body class="project-page project-shuangying">
+    <main class="project-shell">
+        <nav class="site-nav" aria-label="主导航">
+            <a class="site-nav__brand" href="../../index.html"><span class="site-nav__mark">T</span><span>陶明轩 <small>GAME DESIGN</small></span></a>
+            <div class="site-nav__links"><a href="../../games.html"><span>↗</span>游戏原型</a><a href="../../designs.html"><span>↗</span>策划案</a><a href="../../analysis.html"><span>↗</span>系统拆解</a><a href="../../about.html"><span>↗</span>关于我</a></div>
+        </nav>
 
-    <div class="game-header" style="text-align: center; margin-bottom: 2rem;">
-        <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), #c7e9fb); -webkit-background-clip: text; background-clip: text; color: transparent;">《符影双生》-- 中式双人合作解谜</h1>
-        <div class="tags" style="justify-content: center;">
-            <span class="tag">个人项目</span>
-            <span class="tag">7天测试</span>
-            <span class="tag">关卡设计</span>
-            <span class="tag">双人同屏</span>
-            <span class="tag">合作解谜</span>
-            <span class="tag">2026.03</span>
-        </div>
-    </div>
-
-    <!-- 主图/视频区 -->
-    <div class="media-section">
-        <img src="../../Games/符影双生/符影双生效果图.png" alt="游戏主视觉" style="width: 100%; height: 100%; object-fit: cover;">
-        <div style="font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem;">🖼 游戏概念图（AI生成） · 双人协作场景</div>
-    </div>
-
-    <!-- 主图/视频区 -->
-    <div class="media-section">
-        <video 
-            src="../../Games/符影双生/符影双生.mp4" 
-            controls 
-            style="width: 100%; height: 100%; object-fit: cover;"
-        >
-            浏览器不支持视频播放，请更换浏览器查看
-        </video>
-        <div style="font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem;">🎬 游戏实机演示视频 · 玩法展示</div>
-    </div>
-
-    <!-- 设计概述 -->
-    <div class="content-block">
-        <h2>📖 设计概述</h2>
-        <p>《符影双生》是一款以"中式传统法术世界"为背景的第三人称双人双端合作解谜游戏。两名玩家分别身处"阳界"与"阴界"，拥有完全不对称的视角与能力，必须通过信息互通与跨空间交互，才能共同破解机关、推进关卡。</p>
-        <p style="margin-top: 0.8rem;">🎯 核心体验：强依赖合作、信息不对称、空间结构解谜、机制递进式成长。</p>
-    </div>
-
-    <!-- 角色设定 -->
-    <div class="content-block">
-        <h2>👥 双人不对称设计</h2>
-        <div class="highlights-grid">
-            <div class="highlight-card">
-                <strong>☀️ 符师·阳（阳界）</strong>
-                <p style="font-size: 0.85rem; margin-top: 0.3rem;">操控实体机关，使用镇符固定平台、燃符焚烧藤蔓，负责实际操作。</p>
+        <section class="project-hero">
+            <div>
+                <p class="project-kicker">GAMEPLAY PROTOTYPE / 01</p>
+                <h1>《符影双生》</h1>
+                <p class="project-lead">中式双人双界合作解谜</p>
             </div>
-            <div class="highlight-card">
-                <strong>🌙 符师·阴（阴界）</strong>
-                <p style="font-size: 0.85rem; margin-top: 0.3rem;">查看灵界信息，使用引符引导鬼魂、显符显现隐藏路径，负责提供提示。</p>
+            <div class="project-meta">
+                <span>个人项目 · 7天原型</span>
+                <span>关卡设计 · 双人同屏</span>
+                <span>合作解谜 · 2026.03</span>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- 设计亮点 -->
-    <div class="content-block">
-        <h2>✨ 设计亮点</h2>
-        <div class="highlights-grid">
-            <div class="highlight-card">
-                <strong>🎭 阴阳双界机制</strong>
-                <p style="font-size: 0.85rem;">两界结构一致但内容不同，形成强信息差，必须高频沟通。</p>
+        <figure class="project-hero-media">
+            <img src="符影双生效果图.png" alt="《符影双生》阴阳双界主视觉">
+            <figcaption>左右分屏的阴阳双界视角：同一空间，不同信息与能力。</figcaption>
+        </figure>
+
+        <section class="project-intro project-section">
+            <div class="project-section-title">
+                <p class="project-kicker">01 / DESIGN OVERVIEW</p>
+                <h2>让沟通本身<br>成为解谜的一部分。</h2>
             </div>
-            <div class="highlight-card">
-                <strong>🧩 能力互补解谜</strong>
-                <p style="font-size: 0.85rem;">单人无法通关，所有谜题需阴阳能力配合才能解开。</p>
+            <div class="project-section-copy">
+                <p>《符影双生》是一款以“中式传统法术世界”为背景的第三人称双人双端合作解谜游戏。两名玩家分别身处“阳界”与“阴界”，拥有完全不对称的视角与能力，必须通过信息互通与跨空间交互，才能共同破解机关、推进关卡。</p>
+                <div class="project-highlight">核心体验：强依赖合作、信息不对称、空间结构解谜、机制递进式成长。</div>
             </div>
-            <div class="highlight-card">
-                <strong>🏮 中式法术美学</strong>
-                <p style="font-size: 0.85rem;">以符箓、鬼魂、阵法、四象八卦构建完整中式法术世界观。</p>
+        </section>
+
+        <section class="project-video project-section">
+            <div class="project-section-title project-section-title--row">
+                <div><p class="project-kicker">02 / PLAYABLE PROTOTYPE</p><h2>实际游玩</h2></div>
+                <span>双界合作解谜流程</span>
             </div>
-            <div class="highlight-card">
-                <strong>🔁 机制递进设计</strong>
-                <p style="font-size: 0.85rem;">从理解→应用→组合→上强度，难度平滑上升。</p>
+            <video src="符影双生.mp4" controls preload="metadata" poster="符影双生效果图.png">
+                浏览器不支持视频播放，请更换浏览器查看
+            </video>
+        </section>
+
+        <section class="project-section">
+            <div class="project-section-title">
+                <p class="project-kicker">03 / ASYMMETRIC CO-OP</p>
+                <h2>两名玩家<br>各自拥有一半答案。</h2>
             </div>
-        </div>
-    </div>
+            <div class="project-role-grid">
+                <article class="project-role project-role--yang">
+                    <span class="project-role__symbol">☀</span>
+                    <h3>符师·阳 <small>阳界</small></h3>
+                    <p>操控实体机关，使用镇符固定平台、燃符焚烧藤蔓，负责实际操作。</p>
+                </article>
+                <article class="project-role project-role--yin">
+                    <span class="project-role__symbol">☾</span>
+                    <h3>符师·阴 <small>阴界</small></h3>
+                    <p>查看灵界信息，使用引符引导鬼魂、显符显现隐藏路径，负责提供提示。</p>
+                </article>
+            </div>
+        </section>
 
-    <!-- 关卡设计 -->
-    <div class="content-block">
-        <h2>🗺 关卡设计</h2>
-        <p>全程4大区域，流程由浅入深，总时长约20–35分钟：</p>
-        <ul style="margin-left: 1.5rem; margin-top: 0.8rem; color: var(--text-secondary);">
-            <li><strong>初入洞穴</strong>：基础操作教学，理解阴阳双界与基础符术</li>
-            <li><strong>寺庙入口</strong>：能力过渡，开始双人简单配合</li>
-            <li><strong>寺院中庭</strong>：四象机关组合，双人分工解谜</li>
-            <li><strong>主殿终关</strong>：五层复合谜题，融合翻转、跨界交互</li>
-        </ul>
-    </div>
+        <section class="project-section">
+            <div class="project-section-title project-section-title--row">
+                <div><p class="project-kicker">04 / DESIGN PILLARS</p><h2>设计亮点</h2></div>
+                <span>从规则差异到合作反馈</span>
+            </div>
+            <div class="project-pillar-list">
+                <article><span>01</span><div><h3>阴阳双界机制</h3><p>两界结构一致但内容不同，形成强信息差，必须高频沟通。</p></div></article>
+                <article><span>02</span><div><h3>能力互补解谜</h3><p>单人无法通关，所有谜题需阴阳能力配合才能解开。</p></div></article>
+                <article><span>03</span><div><h3>中式法术美学</h3><p>以符箓、鬼魂、阵法、四象八卦构建完整中式法术世界观。</p></div></article>
+                <article><span>04</span><div><h3>机制递进设计</h3><p>从理解、应用、组合到上强度，难度平滑上升。</p></div></article>
+            </div>
+        </section>
 
-    <!-- 用户测试反馈 -->
-    <div class="content-block">
-        <h2>🧪 用户测试数据</h2>
-        <p>邀请8组双人玩家实测（前三部分），收集核心反馈：</p>
-        <ul style="margin-left: 1.5rem; margin-top: 0.8rem; color: var(--text-secondary);">
-            <li>✅ 平均通关时长：24分钟</li>
-            <li>✅ 合作依赖度：4.7/5.0</li>
-            <li>✅ 信息沟通频率：每分钟2.5次有效交流</li>
-            <li>📝 优化方向：强化机制提示，简化四象引导</li>
-        </ul>
-    </div>
+        <section class="project-section project-levels">
+            <div class="project-section-title">
+                <p class="project-kicker">05 / LEVEL FLOW</p>
+                <h2>四个区域，<br>一条渐进式学习曲线。</h2>
+            </div>
+            <div class="project-level-list">
+                <div><span>01</span><strong>初入洞穴</strong><p>基础操作教学，理解阴阳双界与基础符术。</p></div>
+                <div><span>02</span><strong>寺庙入口</strong><p>能力过渡，开始双人简单配合。</p></div>
+                <div><span>03</span><strong>寺院中庭</strong><p>四象机关组合，双人分工解谜。</p></div>
+                <div><span>04</span><strong>主殿终关</strong><p>五层复合谜题，融合翻转、跨界交互。</p></div>
+            </div>
+        </section>
 
-    <!-- 我的贡献 -->
-    <div class="content-block">
-        <h2>👤 我的贡献</h2>
-        <ul style="margin-left: 1.5rem; color: var(--text-secondary);">
-            <li>7天独立完成**阴阳双界核心玩法**与不对称能力设计</li>
-            <li>完整规划4大区域、5层复合机关的全流程关卡</li>
-            <li>撰写《符影双生》官方策划文档，明确机制、流程、视觉规范</li>
-            <li>设计双界视觉风格、分屏表现与机关交互逻辑</li>
-            <li>完成玩家测试与3轮迭代优化，提升合作体验与难度曲线</li>
-        </ul>
-    </div>
+        <section class="project-test project-section">
+            <div class="project-section-title project-section-title--row">
+                <div><p class="project-kicker">06 / PLAYTEST</p><h2>用户测试</h2></div>
+                <span>邀请8组双人玩家实测</span>
+            </div>
+            <div class="project-metrics">
+                <div><strong>28</strong><span>分钟平均通关时长</span></div>
+                <div><strong>4.7/5</strong><span>合作依赖度</span></div>
+                <div><strong>2.5</strong><span>每分钟有效交流次数</span></div>
+            </div>
+            <p class="project-test-note">优化方向：强化倒置空间提示，简化四象引导。</p>
+        </section>
 
-    <!-- 底部 -->
-    <div style="text-align: center; padding: 2rem 0;">
-        <a href="../../games.html" class="back-link" style="margin-bottom: 0;">← 返回游戏列表</a>
-    </div>
-</div>
+        <section class="project-contribution project-section">
+            <div class="project-section-title">
+                <p class="project-kicker">07 / MY CONTRIBUTION</p>
+                <h2>我负责把机制<br>变成可玩的关卡。</h2>
+            </div>
+            <ul>
+                <li>7天独立完成阴阳双界核心玩法与不对称能力设计。</li>
+                <li>完整规划4大区域、5层复合机关的全流程关卡。</li>
+                <li>撰写《符影双生》官方策划文档，明确机制、流程、视觉规范。</li>
+                <li>设计双界视觉风格、分屏表现与机关交互逻辑。</li>
+                <li>完成玩家测试与3轮迭代优化，提升合作体验与难度曲线。</li>
+            </ul>
+        </section>
+
+        <footer class="project-footer">
+            <a href="../../games.html">← 返回游戏原型</a>
+            <a href="../../index.html">返回首页 ↗</a>
+        </footer>
+    </main>
 </body>
 </html>

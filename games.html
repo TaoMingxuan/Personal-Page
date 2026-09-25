@@ -5,19 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>游戏Demo列表 | 陶明轩</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project.css">
 </head>
-<body>
-<div class="container">
-    <a href="index.html" class="back-link">← 返回首页</a>
+<body class="catalog-page games-catalog">
+<div class="container games-shell">
+    <nav class="site-nav" aria-label="主导航">
+        <a class="site-nav__brand" href="index.html"><span class="site-nav__mark">T</span><span>陶明轩 <small>GAME DESIGN</small></span></a>
+        <div class="site-nav__links"><a href="games.html"><span>↗</span>游戏原型</a><a href="designs.html"><span>↗</span>策划案</a><a href="analysis.html"><span>↗</span>系统拆解</a><a href="about.html"><span>↗</span>关于我</a></div>
+    </nav>
+    <a href="index.html" class="back-link">← 首页 / 项目目录</a>
 
-    <div class="header">
-        <h1>🎮 游戏Demo列表</h1>
-        <div class="subtitle">点击卡片查看完整设计文档</div>
+    <div class="header catalog-header games-header">
+        <div>
+            <p class="project-kicker">PLAYABLE PROTOTYPES / 2023—2026</p>
+            <h1>游戏原型</h1>
+            <div class="subtitle">把规则、反馈与叙事做成可以被试玩、观察和迭代的体验。</div>
+        </div>
+        <p class="games-header__note">这里记录我如何从一个问题出发，搭建机制，制作原型，再通过试玩把想法变成可验证的游戏。</p>
     </div>
 
-    <div class="view-toggle">
-        <button class="view-btn active" data-view="card">📷 卡片模式</button>
-        <button class="view-btn" data-view="list">📋 列表模式</button>
+    <section class="games-overview" aria-label="项目概览">
+        <div><strong>05</strong><span>项目总数</span></div>
+        <div><strong>02</strong><span>个人项目</span></div>
+        <div><strong>04</strong><span>可试玩项目</span></div>
+        <div><strong>01</strong><span>进行中</span></div>
+    </section>
+
+    <div class="games-toolbar">
+        <p><span>INDEX / 01</span> 按项目查看玩法、关卡与系统实践</p>
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="card">卡片模式</button>
+            <button class="view-btn" data-view="list">列表模式</button>
+        </div>
     </div>
 
     <div id="games-container"></div>
@@ -30,32 +49,53 @@
     const gamesData = [
         {
             title: "超市模拟器·模拟经营Demo(进行中)",
+            status: "进行中",
+            year: "2026",
+            format: "合作项目",
             tags: ["合作项目","玩法设计","模拟经营","多人合作"],
             desc: "一款开超市的模拟经营游戏。玩家需要进货并合理定价这些商品，将它们出售给顾客从而获利。赚取的钱财可以用于招募NPC角色；解锁更多超市结构（扩建）；更多功能玩法（超市外送）等，从而达成循环升级的目的。",
             thumbnail: "Images/占位图.png",
-            /*thumbnail: "Games/超市模拟器/超市模拟器.png",
-            link: "Games/符影双生/202604_符影双生.html"*/
+            link: "games.html"
         },
         {
             title: "符影双生·合作解谜Demo",
+            status: "可试玩",
+            year: "2026",
+            format: "个人项目",
             tags: ["个人项目","关卡设计","玩法设计","合作解谜","双人同屏"],
             desc: "一款中式题材的双人合作解谜游戏，两位玩家需要分别控制阴阳两种力量。",
             thumbnail: "Games/符影双生/符影双生效果图.png",
             link: "Games/符影双生/202604_符影双生.html"
         },
         {
+            title: "R00T.5·蒸汽朋克节奏探索Demo",
+            status: "已完成",
+            year: "2023",
+            format: "Game Jam",
+            tags: ["节奏探索","蒸汽朋克","Game Jam"],
+            desc: "Global Game Jam 2023 72小时4人团队节奏探索游戏，操控采矿机器人跟随节拍挖掘地下收集种子。",
+            thumbnail: "Games/R00T.5/Cover.png",
+            link: "Games/R00T.5/202302_R00T.5.html"
+        },
+        {
+            title: "Laugh Lift·休闲点击Demo",
+            status: "已完成",
+            year: "2024",
+            format: "Game Jam",
+            tags: ["休闲点击", "UE4蓝图", "快速原型", "范围管理"],
+            desc: "Global Game Jam 2024 72小时4人团队休闲点击游戏，通过精准点击让角色不断上升，并用笑声强化主题体验。",
+            thumbnail: "Images/占位图.png",
+            link: "Games/LaughLift/202401_LaughLift.html"
+        },
+        {
             title: "秘密入侵·技能FPSDemo",
+            status: "可试玩",
+            year: "2026",
+            format: "个人项目",
             tags: ["个人项目","任务设计","技能设计","FPS"],
             desc: "一款第一人称潜入与战术射击结合的单人游戏。玩家将潜入敌方的实验基地，获取相关情报，并摧毁相关设施。",
             thumbnail: "Games/秘密入侵/秘密入侵.png",
             link: "Games/秘密入侵/202602_秘密入侵.html"
-        },
-        {
-            title: "R00T.5·蒸汽朋克节奏探索Demo",
-            tags: ["节奏探索","蒸汽朋克","Game Jam",""],
-            desc: "Global Game Jam 2023 72小时4人团队节奏探索游戏，操控采矿机器人跟随节拍挖掘地下收集种子。",
-            thumbnail: "Games/R00T.5/Cover.png",
-            link: "Games/R00T.5/202302_R00T.5.html"
         }
     ];
     // ============================================================
@@ -75,11 +115,12 @@
     function renderCardMode() {
         const container = document.getElementById('games-container');
         container.className = 'work-grid';
-        container.innerHTML = gamesData.map(game => `
+        container.innerHTML = gamesData.map((game, index) => `
             <a href="${game.link}" class="work-card-link">
                 <div class="work-card">
-                    <img src="${game.thumbnail}" alt="${escapeHtml(game.title)}" onerror="this.src='https://picsum.photos/640/360?random=1'">
+                <img src="${game.thumbnail}" alt="${escapeHtml(game.title)}">
                     <div class="work-info">
+                        <div class="work-card__meta"><span>${String(index + 1).padStart(2, '0')}</span><span>${escapeHtml(game.year)} · ${escapeHtml(game.format)}</span><b>${escapeHtml(game.status)}</b></div>
                         <h3>${escapeHtml(game.title)}</h3>
                         <div class="tags">
                             ${game.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
@@ -94,12 +135,13 @@
     function renderListMode() {
         const container = document.getElementById('games-container');
         container.className = 'list-view';
-        container.innerHTML = gamesData.map(game => `
+        container.innerHTML = gamesData.map((game, index) => `
             <a href="${game.link}" class="list-item">
                 <div class="list-item-thumb">
-                    <img src="${game.thumbnail}" alt="${escapeHtml(game.title)}" onerror="this.src='https://picsum.photos/120/90?random=1'">
+                <img src="${game.thumbnail}" alt="${escapeHtml(game.title)}">
                 </div>
                 <div class="list-item-info">
+                    <div class="list-item__meta"><span>${String(index + 1).padStart(2, '0')}</span><span>${escapeHtml(game.year)} · ${escapeHtml(game.format)}</span><b>${escapeHtml(game.status)}</b></div>
                     <h3>${escapeHtml(game.title)}</h3>
                     <div class="tags">
                         ${game.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}

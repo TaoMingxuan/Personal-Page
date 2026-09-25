@@ -5,19 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>策划案列表 | 陶明轩</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/project.css">
 </head>
-<body>
-<div class="container">
-    <a href="index.html" class="back-link">← 返回首页</a>
+<body class="catalog-page games-catalog document-catalog">
+<div class="container games-shell">
+    <nav class="site-nav" aria-label="主导航">
+        <a class="site-nav__brand" href="index.html"><span class="site-nav__mark">T</span><span>陶明轩 <small>GAME DESIGN</small></span></a>
+        <div class="site-nav__links"><a href="games.html"><span>↗</span>游戏原型</a><a href="designs.html"><span>↗</span>策划案</a><a href="analysis.html"><span>↗</span>系统拆解</a><a href="about.html"><span>↗</span>关于我</a></div>
+    </nav>
+    <a href="index.html" class="back-link">← 首页 / 项目目录</a>
 
-    <div class="header" style="margin-bottom: 1.5rem;">
-        <h1>📄 游戏策划案</h1>
-        <div class="subtitle">深度拆解玩法机制与设计逻辑</div>
+    <div class="header catalog-header games-header">
+        <div>
+        <p class="project-kicker">DESIGN DOCUMENTS / 2026</p>
+        <h1>策划案</h1>
+        <div class="subtitle">从体验目标、交互流程到规则细节，记录设计如何落地。</div>
+        </div>
+        <p class="games-header__note">把体验目标翻译成可执行的规则、界面和反馈，让团队可以按照同一份设计继续推进。</p>
     </div>
 
-    <div class="view-toggle">
-        <button class="view-btn active" data-view="card">📷 卡片模式</button>
-        <button class="view-btn" data-view="list">📋 列表模式</button>
+    <section class="games-overview" aria-label="策划案概览">
+        <div><strong>01</strong><span>文档总数</span></div>
+        <div><strong>01</strong><span>HUD 方案</span></div>
+        <div><strong>01</strong><span>移动端项目</span></div>
+        <div><strong>2026</strong><span>最近更新</span></div>
+    </section>
+
+    <div class="games-toolbar">
+        <p><span>INDEX / 02</span> 按文档查看目标、流程与交互决策</p>
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="card">卡片模式</button>
+            <button class="view-btn" data-view="list">列表模式</button>
+        </div>
     </div>
 
     <div id="analysis-container" class="work-grid"></div>
@@ -27,8 +46,11 @@
     const analysisData = [
         {
             title: "《GTA Online》移动端HUD策划案",
+            status: "PDF 文档",
+            year: "2026",
+            format: "移动端 · HUD",
             tags: ["移动端", "HUD", "UI交互","系统策划"],
-            desc: "深度拆解其卡牌构筑系统的设计逻辑、卡牌平衡与成长曲线。",
+            desc: "围绕移动端射击场景，规划 HUD 信息层级、战斗反馈和关键交互流程。",
             thumbnail: "PDFs/Design/射击手游HUD策划案/射击HUD效果图.png",
             detailLink: "PDFs/Design/射击手游HUD策划案/202601_射击手游HUD策划案.pdf"
         }
@@ -37,11 +59,12 @@
     function renderCardMode() {
         const container = document.getElementById('analysis-container');
         container.className = 'work-grid';
-        container.innerHTML = analysisData.map(item => `
+        container.innerHTML = analysisData.map((item, index) => `
             <a href="${item.detailLink}" class="work-card-link">
                 <div class="work-card">
                     <img src="${item.thumbnail}" alt="${item.title}">
                     <div class="work-info">
+                        <div class="work-card__meta"><span>${String(index + 1).padStart(2, '0')}</span><span>${item.year} · ${item.format}</span><b>${item.status}</b></div>
                         <h3>${item.title}</h3>
                         <div class="tags">
                             ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
@@ -56,12 +79,13 @@
     function renderListMode() {
         const container = document.getElementById('analysis-container');
         container.className = 'list-view';
-        container.innerHTML = analysisData.map(item => `
+        container.innerHTML = analysisData.map((item, index) => `
             <a href="${item.detailLink}" class="list-item">
                 <div class="list-item-thumb">
                     <img src="${item.thumbnail}" alt="${item.title}">
                 </div>
                 <div class="list-item-info">
+                    <div class="list-item__meta"><span>${String(index + 1).padStart(2, '0')}</span><span>${item.year} · ${item.format}</span><b>${item.status}</b></div>
                     <h3>${item.title}</h3>
                     <div class="tags">
                         ${item.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}

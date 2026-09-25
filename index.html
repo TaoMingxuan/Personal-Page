@@ -3,105 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>游戏策划作品集 | 陶明轩</title>
+    <meta name="description" content="陶明轩的游戏策划作品集，聚焦玩法设计、系统设计、关卡设计与可玩原型验证。">
+    <title>陶明轩｜游戏策划作品集</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>history.scrollRestoration = 'manual';</script>
 </head>
-<body>
-<div class="container">
-    <!-- 页眉 -->
- <div style="position: absolute; left: 20px; color: #ffffff; font-size: 14px; opacity: 0.5; user-select: none; z-index: 999;">
-        最后更新：2026年08月12日
- </div>
- <div style="position: absolute; right: 20px; color: #ffffff; font-size: 14px; opacity: 0.5; user-select: none; z-index: 999;">
-        过往项目持续整理中。。。
- </div>
-    <!-- 抬头 -->
-    <div class="header">
-        <h1>🎮 陶明轩</h1>
-        <div class="subtitle">游戏策划 · 玩法设计 · 系统策划</div>
-        <div class="contact-links">
-            <a href="mailto:2383444951@qq.com">📧 邮箱</a>
-            <a href="https://www.youtube.com/@HDG801">🎞 Youtube主页</a>
-            <a href="PDFs\个人简历.pdf" download="个人简历.pdf" >📄 简历PDF</a>
+<body class="home-page intro-active">
+    <section class="home-intro" aria-label="个人主页开屏" aria-hidden="false">
+        <div class="home-intro__grid" aria-hidden="true"></div>
+        <div class="home-intro__ring home-intro__ring--one" aria-hidden="true"></div>
+        <div class="home-intro__ring home-intro__ring--two" aria-hidden="true"></div>
+        <div class="home-intro__content">
+            <div class="home-intro__index">01 / PORTFOLIO</div>
+            <div class="home-intro__mark" aria-hidden="true">
+                <svg viewBox="0 0 64 48" role="presentation">
+                    <path d="M17 9h30c7 0 12 5 14 12l3 12c2 8-8 13-13 6l-5-7H18l-5 7C8 46-2 41 0 33l3-12C5 14 10 9 17 9Z"/>
+                    <path d="M18 18v10M13 23h10M45 21h.1M51 27h.1"/>
+                </svg>
+            </div>
+            <h1>陶明轩</h1>
+            <p>游戏策划 · 玩法设计 · 系统策划</p>
         </div>
-    </div>
+        <button class="home-intro__enter" type="button" aria-label="进入作品集">
+            <span>进入作品集</span>
+            <span class="home-intro__enter-icon" aria-hidden="true">↓</span>
+        </button>
+    </section>
 
-    <!-- 三个导航按钮 -->
-    <div class="nav-buttons">
-        <a href="games.html" class="nav-btn">🎮 游戏Demo列表</a> 
-        <a href="designs.html" class="nav-btn"> 📄 策划案列表</a>
-        <a href="analysis.html" class="nav-btn">🛠 拆解案列表</a>
-        <a href="about.html" class="nav-btn primary">👤 关于我</a>
-    </div>
-
-    <!-- 三个最新项目 -->
-    <h2 class="section-title">✨ 最新项目</h2>
-    <div id="latest-projects" class="work-grid"></div>
-
-</div>
-    <script>
-    // ============================================================
-    // 👇👇👇 在这里手动填写最新项目数据 👇👇👇
-    // ============================================================
-    const latestProjectsData = [
-        {
-            title: "超市模拟器·模拟经营Demo(进行中)",
-            tags: ["合作项目","玩法设计","模拟经营",  "双人"],
-            desc: "一款开超市的模拟经营游戏。玩家需要进货并合理定价这些商品，将它们出售给顾客从而获利。赚取的钱财可以用于招募NPC角色；解锁更多超市结构（扩建）；更多功能玩法（超市外送）等，从而达成循环升级的目的。",
-            thumbnail: "Images/占位图.png",
-            /*thumbnail: "Games/超市模拟器/超市模拟器.png",
-            link: "Games/符影双生/202604_符影双生.html"*/
-        },
-        {
-            title: "符影双生·合作解谜Demo",
-            tags: ["个人项目","关卡设计","玩法设计","合作解谜","双人同屏"],
-            desc: "一款中式题材的双人合作解谜游戏，两位玩家需要分别控制阴阳两种力量。",
-            thumbnail: "Games/符影双生/符影双生效果图.png",
-            link: "Games/符影双生/202604_符影双生.html"
-        },
-        {
-            title: "《明日方舟：终末地》养成系统拆解",
-            tags: ["系统拆解", "养成系统", "二游"],
-            desc: "对《明日方舟：终末地》的养成系统进行系统化拆解，分析角色成长、资源循环及工业与战斗系统的耦合设计，总结其长线养成与低焦虑体验的设计思路",
-            thumbnail: "PDFs/Analysis/明日方舟终末地/养成系统拆解.png",
-            link: "PDFs/Analysis/明日方舟终末地/202603_养成系统拆解案.pdf"
-        }
-    ];
-    // ============================================================
-
-
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
-
-    function renderLatestProjects() {
-        const container = document.getElementById('latest-projects');
-        container.innerHTML = latestProjectsData.map(project => `
-            <a href="${project.link}" class="work-card-link">
-                <div class="work-card">
-                    <img src="${project.thumbnail}" alt="${escapeHtml(project.title)}" onerror="this.src='https://picsum.photos/640/360?random=1'">
-                    <div class="work-info">
-                        <h3>${escapeHtml(project.title)}</h3>
-                        <div class="tags">
-                            ${project.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
-                        </div>
-                        <p>${escapeHtml(project.desc)}</p>
-                    </div>
-                </div>
+    <main class="home-shell">
+        <nav class="home-nav" aria-label="主导航">
+            <a class="home-brand" href="index.html" aria-label="返回首页">
+                <span class="home-brand__mark">T</span>
+                <span>陶明轩 <small>GAME DESIGN</small></span>
             </a>
-        `).join('');
-    }
+            <div class="home-nav__links">
+                <a href="games.html"><span class="nav-icon" aria-hidden="true">↗</span>游戏原型</a>
+                <a href="designs.html"><span class="nav-icon" aria-hidden="true">↗</span>策划案</a>
+                <a href="analysis.html"><span class="nav-icon" aria-hidden="true">↗</span>系统拆解</a>
+                <a href="about.html"><span class="nav-icon" aria-hidden="true">↗</span>关于我</a>
+            </div>
+        </nav>
 
-    // 初始渲染最新项目
-    renderLatestProjects();
-</script>
+        <div class="home-topline">
+            <span>最后更新：2026年08月12日</span>
+            <span>过往项目持续整理中。。。</span>
+        </div>
 
-</div>
+        <section class="home-hero" aria-labelledby="hero-title">
+            <div class="home-hero__copy">
+                <p class="home-kicker">GAMEPLAY / SYSTEM / LEVEL</p>
+                <h2 id="hero-title">把体验目标，<br><em>变成可以玩的机制。</em></h2>
+                <p class="home-hero__summary">我是一名以玩法设计与快速原型为核心方向的游戏策划，习惯从玩家体验出发，拆解成可验证的 Gameplay，再通过试玩不断迭代。</p>
+                <div class="home-hero__actions">
+                    <a class="home-button home-button--solid" href="#featured">查看代表作 <span>↘</span></a>
+                    <a class="home-button home-button--line" href="PDFs/个人简历.pdf" download="个人简历.pdf">下载简历 <span>↓</span></a>
+                </div>
+            </div>
+            <div class="home-hero__visual">
+                <div class="home-hero__portrait-frame">
+                    <img src="Images/Photo.jpg" alt="陶明轩头像">
+                    <span class="home-hero__stamp">PLAY<br>TEST<br>ITERATE</span>
+                </div>
+                <div class="home-hero__note">从抽象概念<br>到可玩原型</div>
+            </div>
+        </section>
+
+        <section class="home-directory" aria-labelledby="directory-title">
+            <div class="home-directory__heading">
+                <p class="home-kicker">PROJECT DIRECTORY</p>
+                <h2 id="directory-title">全部项目</h2>
+                <p>按作品类型快速浏览，方便了解我的完整项目范围。</p>
+            </div>
+            <div class="home-directory__links">
+                <a href="games.html">
+                    <span class="home-directory__number">01</span>
+                    <strong>游戏原型</strong>
+                    <small>Gameplay / Level Design</small>
+                    <b>↗</b>
+                </a>
+                <a href="designs.html">
+                    <span class="home-directory__number">02</span>
+                    <strong>策划案</strong>
+                    <small>HUD / System Design</small>
+                    <b>↗</b>
+                </a>
+                <a href="analysis.html">
+                    <span class="home-directory__number">03</span>
+                    <strong>系统拆解</strong>
+                    <small>Research / Analysis</small>
+                    <b>↗</b>
+                </a>
+                <a href="about.html">
+                    <span class="home-directory__number">04</span>
+                    <strong>关于我</strong>
+                    <small>Profile / Contact</small>
+                    <b>↗</b>
+                </a>
+            </div>
+        </section>
+
+        <section class="home-featured" id="featured" aria-labelledby="featured-title">
+            <div class="home-section-heading">
+                <div><p class="home-kicker">SELECTED WORKS</p><h2 id="featured-title">代表作</h2></div>
+                <a href="games.html">查看全部项目 <span>↗</span></a>
+            </div>
+
+            <article class="home-project home-project--wide">
+                <a class="home-project__media" href="Games/符影双生/202604_符影双生.html">
+                    <img src="Games/符影双生/符影双生效果图.png" alt="符影双生合作解谜 Demo"><span>VIEW PROJECT ↗</span>
+                </a>
+                <div class="home-project__body">
+                    <p class="home-project__meta">01 / 个人项目 · 玩法设计 · 关卡设计</p>
+                    <h3>符影双生·合作解谜Demo</h3>
+                    <p>一款中式题材的双人合作解谜游戏，两位玩家分别控制阴阳两种力量。围绕信息差与协作关系设计核心机制，并使用 UE 蓝图完成可玩原型。</p>
+                    <a class="home-text-link" href="Games/符影双生/202604_符影双生.html">查看完整项目 <span>↗</span></a>
+                </div>
+            </article>
+
+            <div class="home-projects-grid">
+                <article class="home-project">
+                    <a class="home-project__media" href="games.html">
+                        <img src="Images/占位图.png" alt="超市模拟器模拟经营 Demo"><span>IN PROGRESS ↗</span>
+                    </a>
+                    <div class="home-project__body">
+                        <p class="home-project__meta">02 / 合作项目 · 模拟经营 · 进行中</p>
+                        <h3>超市模拟器·模拟经营Demo(进行中)</h3>
+                        <p>围绕进货、定价、销售与扩建构建经营循环，并逐步加入 NPC 招募和超市外送等玩法。</p>
+                        <a class="home-text-link" href="games.html">查看项目列表 <span>↗</span></a>
+                    </div>
+                </article>
+                <article class="home-project">
+                    <a class="home-project__media" href="PDFs/Analysis/明日方舟终末地/202603_养成系统拆解案.pdf">
+                        <img src="PDFs/Analysis/明日方舟终末地/养成系统拆解.png" alt="明日方舟终末地养成系统拆解"><span>READ CASE ↗</span>
+                    </a>
+                    <div class="home-project__body">
+                        <p class="home-project__meta">03 / 系统拆解 · 养成系统 · 二游</p>
+                        <h3>《明日方舟：终末地》养成系统拆解</h3>
+                        <p>分析角色成长、资源循环及工业与战斗系统的耦合设计，总结其长线养成与低焦虑体验。</p>
+                        <a class="home-text-link" href="PDFs/Analysis/明日方舟终末地/202603_养成系统拆解案.pdf">阅读完整拆解 <span>↗</span></a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="home-capabilities" aria-labelledby="capabilities-title">
+            <div><p class="home-kicker">WHAT I BRING</p><h2 id="capabilities-title">从想法到落地，<br>保持设计和实现同频。</h2></div>
+            <div class="home-capabilities__list">
+                <div><span>01</span><strong>玩法设计</strong><p>从核心乐趣出发，搭建规则、反馈与循环。</p></div>
+                <div><span>02</span><strong>系统设计</strong><p>拆解成长、资源与长期体验，建立清晰的系统关系。</p></div>
+                <div><span>03</span><strong>快速原型</strong><p>使用 Unreal Engine Blueprint 快速验证 Gameplay。</p></div>
+            </div>
+        </section>
+
+        <footer class="home-footer">
+            <div><p class="home-kicker">LET'S TALK</p><h2>一起做出值得玩的东西。</h2></div>
+            <div class="home-footer__links">
+                <a href="mailto:2383444951@qq.com">📧 邮箱</a>
+                <a href="https://www.youtube.com/@HDG801">🎞 Youtube主页</a>
+                <a href="about.html">👤 关于我</a>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        let introDismissed = false;
+        window.scrollTo(0, 0);
+        function dismissIntro() {
+            if (introDismissed) return;
+            introDismissed = true;
+            window.scrollTo(0, 0);
+            document.body.classList.remove('intro-active');
+            document.body.classList.add('intro-dismissed');
+            document.querySelector('.home-intro').setAttribute('aria-hidden', 'true');
+        }
+        document.querySelector('.home-intro__enter').addEventListener('click', dismissIntro);
+        window.addEventListener('wheel', event => {
+            if (event.deltaY > 0 && !introDismissed) { event.preventDefault(); dismissIntro(); }
+        }, { passive: false });
+        window.addEventListener('keydown', event => {
+            if (['ArrowDown', 'PageDown', 'Enter', ' '].includes(event.key)) dismissIntro();
+        });
+        let touchStartY = 0;
+        window.addEventListener('touchstart', event => { touchStartY = event.changedTouches[0].clientY; }, { passive: true });
+        window.addEventListener('touchend', event => { if (touchStartY - event.changedTouches[0].clientY > 24) dismissIntro(); }, { passive: true });
+    </script>
 </body>
 </html>
