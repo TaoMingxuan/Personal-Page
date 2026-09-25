@@ -1,0 +1,376 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ========== 元数据（列表页会自动读取这些） ========== -->
+    <meta name="game-title" content="Laugh Lift">
+    <meta name="game-tags" content="休闲点击,Game Jam,UE4蓝图,快速原型,范围管理">
+    <meta name="game-desc" content="Global Game Jam 2024 72小时4人团队休闲点击游戏，通过精准点击让角色不断上升，并用笑声强化主题体验。">
+    <meta name="game-thumb" content="Games/Laugh Lift/Laugh Lift效果图.png">
+    <meta name="game-date" content="2024">
+    <!-- ================================================= -->
+    
+    <title>Laugh Lift · GameJam项目</title>
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <style>
+        .media-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 24px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .media-section video, .media-section img {
+            max-width: 100%;
+            border-radius: 16px;
+        }
+        .media-section video {
+            display: block;
+        }
+        .content-block {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border);
+        }
+        .content-block h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            border-left: 3px solid var(--accent);
+            padding-left: 0.8rem;
+        }
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .highlight-card {
+            background: rgba(255,255,255,0.03);
+            border-radius: 16px;
+            padding: 1rem;
+            border-left: 3px solid var(--accent);
+        }
+        .highlight-card p {
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+        .info-list {
+            margin-left: 1.5rem;
+            margin-top: 0.8rem;
+            color: var(--text-secondary);
+        }
+        .media-caption {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+        .screenshot-carousel {
+          width:100%;
+          /*max-width:900px;*/
+          margin:0 auto;
+          overflow:hidden;
+          position: relative; /* ✅关键：给absolute按钮做定位容器 */
+        }
+        .carousel-track {
+          display:flex;
+        }
+        .carousel-slide {
+          flex:0 0 100%;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          /* 给slide一点上下内边距，防止图片贴边碰到按钮 */
+          padding: 0 3rem;
+          box-sizing: border-box;
+        }
+        .carousel-slide img {
+          display:block;
+          max-width:100%;
+          max-height:70vh;
+          width:auto;
+          height:auto;
+          object-fit:contain;
+        }
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 50%;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+            font-size: 1.5rem;
+            line-height: 1;
+            cursor: pointer;
+            transform: translateY(-50%);
+            transition: background 0.2s ease, transform 0.2s ease;
+            z-index: 20; /* 提高z-index，防止被其他元素遮挡 */
+        }
+        .carousel-button:hover {
+            background: rgba(0,0,0,0.72);
+            transform: translateY(-50%) scale(1.04);
+        }
+        .carousel-button.prev {
+            left: 0.5rem;
+        }
+        .carousel-button.next {
+            right: 0.5rem;
+        }
+        .carousel-dots {
+            position: absolute;
+            left: 50%;
+            bottom: 0.8rem;
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.4rem 0.65rem;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.45);
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+        .carousel-dot {
+            width: 9px;
+            height: 9px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.45);
+            cursor: pointer;
+        }
+        .carousel-dot.active {
+            background: var(--accent);
+        }
+        @media (max-width: 640px) {
+            .carousel-button {
+                width: 36px;
+                height: 36px;
+                font-size: 1.2rem;
+            }
+            .carousel-button.prev {
+                left: 0.3rem;
+            }
+            .carousel-button.next {
+                right: 0.3rem;
+            }
+            .carousel-slide {
+                padding:0 2.2rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="../../games.html" class="back-link">← 返回游戏列表</a>
+
+    <div class="game-header" style="text-align: center; margin-bottom: 2rem;">
+        <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), #c7e9fb); -webkit-background-clip: text; background-clip: text; color: transparent;">Laugh Lift -- 主题驱动的快速原型</h1>
+        <div class="tags" style="justify-content: center;">
+            <span class="tag">Global Game Jam 2024</span>
+            <span class="tag">72h Game Jam</span>
+            <span class="tag">4人团队</span>
+            <span class="tag">主策划/唯一程序</span>
+            <span class="tag">UE4 Blueprint</span>
+        </div>
+    </div>
+
+    <!-- PV视频区 -->
+    <div class="media-section">
+        <video
+            src="../../Games/LaughLift/LaughLift_PV.mp4"
+            controls
+            style="width: 100%; height: 100%; object-fit: cover;"
+        >
+            浏览器不支持视频播放，请更换浏览器查看
+        </video>
+        <div style="font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem;">🎬 游戏PV · 主题与核心玩法展示</div>
+    </div>
+
+    <!-- 截图轮播 -->
+    <div class="media-section">
+        <div class="screenshot-carousel" data-carousel>
+            <div class="carousel-track" data-carousel-track>
+                <div class="carousel-slide">
+                    <img src="../../Games/Laugh Lift/Laugh Lift效果图.png" alt="《Laugh Lift》效果图">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../../Games/Laugh Lift/角色与笑声.png" alt="《Laugh Lift》角色与笑声系统">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../../Games/Laugh Lift/无限背景.png" alt="《Laugh Lift》无限背景">
+                </div>
+                <div class="carousel-slide">
+                    <img src="../../Games/Laugh Lift/界面设计图.jpg" alt="《Laugh Lift》界面设计图">
+                </div>
+            </div>
+            <button class="carousel-button prev" type="button" data-carousel-prev aria-label="上一张">‹</button>
+            <button class="carousel-button next" type="button" data-carousel-next aria-label="下一张">›</button>
+            <div class="carousel-dots" aria-label="截图页码" data-carousel-dots></div>
+        </div>
+        <div class="media-caption">🖼 游戏截图与设计素材</div>
+    </div>
+
+    <!-- 实机视频区 -->
+    <div class="media-section">
+        <video
+            src="../../Games/LaughLift/LaughLift_Gameplay.mp4"
+            controls
+            style="width: 100%; height: 100%; object-fit: cover;"
+        >
+            浏览器不支持视频播放，请更换浏览器查看
+        </video>
+        <div style="font-size: 1rem; color: var(--text-secondary); margin-top: 0.5rem;">🎬 游戏实机演示 · 核心Gameplay流程展示</div>
+    </div>
+
+    <!-- 设计概述 -->
+    <div class="content-block">
+        <h2>📖 项目简介</h2>
+        <p>Laugh Lift 是 Global Game Jam 2024 参赛作品，一款围绕主题「Laugh」设计的休闲点击游戏。玩家需要精准点击不断移动中的角色，使角色持续向上攀升；每次成功点击都会产生一次随机方向的上升，并播放角色独特的笑声。</p>
+        <p style="margin-top: 0.8rem;">🎯 核心体验：精准点击、随机上升、角色笑声反馈、无限上升、挑战最高分与收集笑声。</p>
+    </div>
+
+    <!-- 个人定位与分工 -->
+    <div class="content-block">
+        <h2>👥 个人定位与分工</h2>
+        <div class="highlights-grid">
+            <div class="highlight-card">
+                <strong>📝 主策划</strong>
+                <p>从「Laugh」主题出发确定核心玩法，负责游戏循环、角色/笑声系统、范围控制与最终体验方向。</p>
+            </div>
+            <div class="highlight-card">
+                <strong>💻 唯一程序（UE4 Blueprint）</strong>
+                <p>独立完成点击交互、随机移动、分数、解锁、摄像机、无限背景、UI、流程等主要Gameplay系统。</p>
+            </div>
+            <div class="highlight-card">
+                <strong>🎨 资产与音效整合</strong>
+                <p>负责游戏资产整合、点击区域协作、音效接入以及最终项目展示素材整理。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详细工作职责 -->
+    <div class="content-block">
+        <h2>📋 我的职责</h2>
+        <h3 style="margin-top:0.5rem;color:var(--accent);">游戏策划</h3>
+        <ul class="info-list">
+            <li>将抽象主题「Laugh」拆解为“通过笑声让玩家发笑”的核心体验目标</li>
+            <li>设计“点击角色 → 随机上升 → 播放笑声”的核心Gameplay Loop</li>
+            <li>设计角色、笑声解锁、分数与高度进度系统</li>
+            <li>根据核心玩法进行快速脑测，判断功能优先级并主动削减障碍物、辅助道具等非核心内容</li>
+            <li>根据测试反馈迭代摄像机跟随与视觉表现</li>
+        </ul>
+
+        <h3 style="margin-top:1.2rem;color:var(--accent);">Gameplay程序（UE4蓝图）</h3>
+        <ul class="info-list">
+            <li>角色点击交互与碰撞检测</li>
+            <li>随机水平偏移与随机向上力量</li>
+            <li>角色旋转、表情切换与笑声播放</li>
+            <li>重力、下落、死亡与重新开始流程</li>
+            <li>高度/分数计算与笑声解锁逻辑</li>
+            <li>角色切换与随机笑声选择</li>
+            <li>摄像机延迟跟随</li>
+            <li>无限背景循环与区域切换</li>
+            <li>UI、游戏状态与整体流程控制</li>
+        </ul>
+    </div>
+
+    <!-- 设计过程 -->
+    <div class="content-block">
+        <h2>🛠 设计过程</h2>
+
+        <h3 style="margin-top:0.5rem;color:var(--accent);">从 Game Jam 主题到核心玩法</h3>
+        <p>本次 Game Jam 的主题为「Laugh」。我首先将主题拆解为“让玩家笑”和“笑声本身”两个方向，并发现两者可以结合：如果笑声具有感染力，那么游戏就可以通过持续制造笑声来让玩家发笑。</p>
+        <p style="margin-top:0.8rem;">因此，我反向寻找一种能够高频触发笑声的交互方式，最终确定“精准点击角色”作为核心交互。每次成功点击都会让角色随机向左上或右上方向移动，同时触发该角色独特的笑声，从而形成「Click → Lift → Laugh」的核心循环。</p>
+
+        <h3 style="margin-top:1.2rem;color:var(--accent);">72小时开发范围取舍（Scope Management）</h3>
+        <p>确定核心玩法后，我通过快速脑测判断哪些内容会强化核心体验，哪些内容反而可能分散玩家注意力：</p>
+        <ul class="info-list">
+            <li><strong>必须做：</strong>精准点击、随机移动、笑声反馈、死亡/重开、分数与核心流程。</li>
+            <li><strong>应该做：</strong>角色切换、笑声解锁、不同高度环境、无限背景与摄像机跟随。</li>
+            <li><strong>可以做：</strong>更多角色、更多笑声及更多环境内容。</li>
+            <li><strong>主动削减：</strong>区域专属障碍物、辅助道具等系统。因为玩家已经需要精准追踪随机移动的角色，继续增加目标可能削弱“点击触发笑声”这一核心体验。</li>
+        </ul>
+
+        <h3 style="margin-top:1.2rem;color:var(--accent);">摄像机迭代</h3>
+        <p>开发过程中发现角色随机移动配合直接跟随摄像机会造成过快的背景运动，使角色难以观察，并可能带来视觉眩晕。因此加入延迟跟随机制：只有当角色超过屏幕中部区域后，摄像机才开始跟随。</p>
+
+        <h3 style="margin-top:1.2rem;color:var(--accent);">无限背景实现</h3>
+        <p>无限背景是我在本项目中最满意的技术实现之一。远景背景本身不直接移动，中景使用两个相同背景区域进行无缝衔接，并根据摄像机 Z 轴位置与公式计算其位置，使玩家能够持续向上移动而不产生明显的场景边界。</p>
+        <p style="margin-top:0.8rem;">不同高度还会切换海底、水下、农场、城市、天空与太空等环境，使无限上升拥有明确的视觉进度。这套实现也成为我之后项目处理类似无限场景需求时的技术参考。</p>
+    </div>
+
+    <!-- Playtest -->
+    <div class="content-block">
+        <h2>🧪 试玩与反馈</h2>
+        <p>项目最后一天上午进行了跨团队测试。测试中最直接的反馈是玩家确实会因为角色不断产生的笑声而笑出来，验证了最初“通过笑声让玩家发笑”的主题假设。</p>
+        <p style="margin-top:0.8rem;">但测试同时暴露出游戏性的限制：由于核心玩法非常简单，玩家很快能够理解完整规则，大多数测试者体验约 3 次后便离开。项目缺乏局外成长、敌人、陷阱、辅助道具等能够支撑长期重复游玩的系统。</p>
+        <p style="margin-top:0.8rem;">这并不是单纯的“内容没有做够”，而是与项目最初的设计目标存在矛盾：如果为了增加游戏深度加入过多系统，也可能削弱游戏围绕「Laugh」建立的核心体验。</p>
+    </div>
+
+    <!-- 设计反思 -->
+    <div class="content-block">
+        <h2>📌 设计反思</h2>
+        <p>我并不认为 Laugh Lift 是一个玩法深度很高的项目，但它让我形成了一个重要的 Game Jam 设计判断：<strong>在处理抽象主题时，主题契合度可以优先于传统意义上的玩法复杂度。</strong></p>
+        <p style="margin-top:0.8rem;">对于普通商业项目，我可能会更关注成长、策略、内容量与长期留存；但在 Game Jam 中，首先需要回答的是：“为什么这个游戏一定要是这个主题？”</p>
+        <p style="margin-top:0.8rem;">Laugh Lift 的答案非常直接：<strong>因为玩家每一次点击，都在通过笑声让角色继续上升。</strong></p>
+    </div>
+
+    <!-- 项目总结 -->
+    <div class="content-block">
+        <h2>🏆 项目总结</h2>
+        <p>Laugh Lift 在 72 小时内完成从抽象主题、核心机制、可玩原型到完整展示版本的开发，并在 Global Game Jam 2024 Teesside 站点的 20+ 个作品中排名第 4。</p>
+        <p style="margin-top:0.8rem;">这个项目让我重点提升了两项能力：</p>
+        <ul class="info-list">
+            <li><strong>Rapid Prototyping：</strong>能够在短时间内从抽象主题快速形成可验证的核心玩法。</li>
+            <li><strong>Scope Management：</strong>能够通过快速脑测判断哪些功能必须做、应该做、可以做，以及哪些内容即使能够实现也不应该加入。</li>
+            <li><strong>Theme-driven Design：</strong>在 Game Jam 环境下优先保证玩法与主题之间的直接联系，而不是为了增加复杂度而堆叠系统。</li>
+            <li><strong>技术积累：</strong>完成无限背景与摄像机跟随等系统，并将经验迁移到后续项目。</li>
+        </ul>
+    </div>
+
+    <div style="text-align: center; padding: 2rem 0;">
+        <a href="../../games.html" class="back-link" style="margin-bottom: 0;">← 返回游戏列表</a>
+    </div>
+
+    <script>
+    document.querySelectorAll('[data-carousel]').forEach((carousel) => {
+        const track = carousel.querySelector('[data-carousel-track]');
+        const slides = Array.from(track.children);
+        const prevButton = carousel.querySelector('[data-carousel-prev]');
+        const nextButton = carousel.querySelector('[data-carousel-next]');
+        const dotsWrap = carousel.querySelector('[data-carousel-dots]');
+        let currentIndex = 0;
+
+        slides.forEach((_, index) => {
+            const dot = document.createElement('button');
+            dot.className = 'carousel-dot';
+            dot.type = 'button';
+            dot.setAttribute('aria-label', `查看第 ${index + 1} 张截图`);
+            dot.addEventListener('click', () => updateCarousel(index));
+            dotsWrap.appendChild(dot);
+        });
+
+        const dots = Array.from(dotsWrap.children);
+
+        function updateCarousel(index) {
+            currentIndex = (index + slides.length) % slides.length;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('active', dotIndex === currentIndex);
+            });
+        }
+
+        prevButton.addEventListener('click', () => updateCarousel(currentIndex - 1));
+        nextButton.addEventListener('click', () => updateCarousel(currentIndex + 1));
+        updateCarousel(0);
+    });
+    </script>
+</div>
+</body>
+</html>
