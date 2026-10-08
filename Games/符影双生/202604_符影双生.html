@@ -7,23 +7,25 @@
     <meta name="game-tags" content="合作解谜,关卡设计,双人分屏,中式题材">
     <meta name="game-desc" content="一款中式题材的双人合作解谜游戏。两位玩家需要分别控制阴阳两种力量，共同解开机关。">
     <meta name="game-thumb" content="Games/符影双生/符影双生效果图.png">
-    <meta name="game-date" content="202604">
+    <meta name="game-project-id" content="202604">
     <title>《符影双生》｜游戏策划项目</title>
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/project.css">
+    <link rel="stylesheet" href="../../css/game-case.css">
 </head>
-<body class="project-page project-shuangying">
-    <main class="project-shell">
+<body class="game-case project-shuangying">
+    <main class="case-shell">
         <nav class="site-nav" aria-label="主导航">
             <a class="site-nav__brand" href="../../index.html"><span class="site-nav__mark">T</span><span>陶明轩 <small>GAME DESIGN</small></span></a>
             <div class="site-nav__links"><a href="../../games.html"><span>↗</span>游戏原型</a><a href="../../designs.html"><span>↗</span>策划案</a><a href="../../analysis.html"><span>↗</span>系统拆解</a><a href="../../about.html"><span>↗</span>关于我</a></div>
         </nav>
 
+        <a href="../../games.html" class="case-back">← 返回游戏原型</a>
         <section class="project-hero">
             <div>
                 <p class="project-kicker">GAMEPLAY PROTOTYPE / 01</p>
-                <h1>《符影双生》</h1>
+                <h1>符影双生</h1>
                 <p class="project-lead">中式双人双界合作解谜</p>
+                <div class="case-actions"><a class="case-button primary" href="#demo">观看实机演示</a><a class="case-button" href="#duality">了解双界机制</a></div>
             </div>
             <div class="project-meta">
                 <span>个人项目 · 7天原型</span>
@@ -34,10 +36,13 @@
 
         <figure class="project-hero-media">
             <img src="符影双生效果图.png" alt="《符影双生》阴阳双界主视觉">
-            <figcaption>左右分屏的阴阳双界视角：同一空间，不同信息与能力。</figcaption>
+            <div class="duality-caption" aria-hidden="true"><span>阳 · 实体与操作</span><span>阴 · 灵界与线索</span></div>
+            <figcaption><span>阴阳双界主视觉 · 美术效果图</span><span>同一空间，不同信息与能力。</span></figcaption>
         </figure>
 
-        <section class="project-intro project-section">
+        <nav class="case-contents" aria-label="项目章节"><a href="#overview">01 项目概述</a><a href="#demo">02 实机演示</a><a href="#duality">03 阴阳协作</a><a href="#levels">04 关卡递进</a><a href="#contribution">05 我的职责</a></nav>
+
+        <section id="overview" class="project-intro project-section">
             <div class="project-section-title">
                 <p class="project-kicker">01 / DESIGN OVERVIEW</p>
                 <h2>让沟通本身<br>成为解谜的一部分。</h2>
@@ -48,7 +53,7 @@
             </div>
         </section>
 
-        <section class="project-video project-section">
+        <section id="demo" class="project-video project-section">
             <div class="project-section-title project-section-title--row">
                 <div><p class="project-kicker">02 / PLAYABLE PROTOTYPE</p><h2>实际游玩</h2></div>
                 <span>双界合作解谜流程</span>
@@ -58,19 +63,19 @@
             </video>
         </section>
 
-        <section class="project-section">
+        <section id="duality" class="project-section">
             <div class="project-section-title">
                 <p class="project-kicker">03 / ASYMMETRIC CO-OP</p>
                 <h2>两名玩家<br>各自拥有一半答案。</h2>
             </div>
             <div class="project-role-grid">
                 <article class="project-role project-role--yang">
-                    <span class="project-role__symbol">☀</span>
+                    <span class="project-role__symbol" aria-hidden="true">阳</span>
                     <h3>符师·阳 <small>阳界</small></h3>
                     <p>操控实体机关，使用镇符固定平台、燃符焚烧藤蔓，负责实际操作。</p>
                 </article>
                 <article class="project-role project-role--yin">
-                    <span class="project-role__symbol">☾</span>
+                    <span class="project-role__symbol" aria-hidden="true">阴</span>
                     <h3>符师·阴 <small>阴界</small></h3>
                     <p>查看灵界信息，使用引符引导鬼魂、显符显现隐藏路径，负责提供提示。</p>
                 </article>
@@ -90,7 +95,7 @@
             </div>
         </section>
 
-        <section class="project-section project-levels">
+        <section id="levels" class="project-section project-levels">
             <div class="project-section-title">
                 <p class="project-kicker">05 / LEVEL FLOW</p>
                 <h2>四个区域，<br>一条渐进式学习曲线。</h2>
@@ -116,7 +121,7 @@
             <p class="project-test-note">优化方向：强化倒置空间提示，简化四象引导。</p>
         </section>
 
-        <section class="project-contribution project-section">
+        <section id="contribution" class="project-contribution project-section">
             <div class="project-section-title">
                 <p class="project-kicker">07 / MY CONTRIBUTION</p>
                 <h2>我负责把机制<br>变成可玩的关卡。</h2>
@@ -130,7 +135,7 @@
             </ul>
         </section>
 
-        <footer class="project-footer">
+        <footer class="case-footer">
             <a href="../../games.html">← 返回游戏原型</a>
             <a href="../../index.html">返回首页 ↗</a>
         </footer>

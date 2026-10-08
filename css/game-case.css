@@ -1,0 +1,143 @@
+/* Scoped presentation system for the dual-world and tactical prototype pages. */
+html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+.game-case { --ink:#eee9df; --muted:#b6b4ae; --line:#373b39; --paper:#171d1c; --surface:#222a27; --accent:#d9b578; --cool:#91b5bb; --home-ink:var(--ink); --home-muted:var(--muted); --home-line:var(--line); --home-orange:var(--accent); --home-blue:var(--accent); background:var(--paper); color:var(--ink); }
+.game-case a { color:inherit; }
+.case-shell { width:min(1200px,90%); margin:auto; }
+.game-case .site-nav { width:100%; margin:0; padding:20px 0; background:var(--paper); border-color:var(--line); }
+.game-case .site-nav__mark { color:var(--paper); }
+.game-case :focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
+.case-back { display:inline-block; margin-top:25px; color:var(--muted) !important; text-decoration:none; font-size:12px; }
+.case-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:26px; }
+.case-button { display:inline-flex; align-items:center; justify-content:center; padding:12px 22px; min-height:46px; border:1px solid var(--line); text-decoration:none; font-size:13px; font-weight:650; }
+.case-button.primary { color:var(--paper); background:var(--accent); border-color:var(--accent); }
+.case-button:hover { border-color:var(--accent); }
+.case-contents { display:flex; flex-wrap:wrap; gap:12px 32px; padding:22px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); font-size:12px; color:var(--muted); }
+.case-contents a { text-decoration:none; }
+.case-contents a:hover { color:var(--accent); }
+.case-label { display:block; color:var(--accent); font:11px/1.6 Consolas,monospace; letter-spacing:.12em; margin-bottom:14px; }
+.case-footer { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; padding:28px 0 45px; border-top:1px solid var(--line); font-size:13px; color:var(--muted); }
+.case-footer a { text-decoration:none; }
+.game-case img { display:block; max-width:100%; }
+.game-case video { display:block; width:100%; background:#080b0a; }
+.game-case section { scroll-margin-top:24px; }
+/* 符影双生 — dark ink, warm/cool duality and an open chapter structure. */
+.project-shuangying .project-hero { display:grid; grid-template-columns:1fr 260px; align-items:end; gap:40px; padding:60px 0 42px; }
+.project-shuangying .project-kicker { color:var(--accent); font:11px/1.5 Consolas,monospace; letter-spacing:.14em; margin-bottom:15px; }
+.project-shuangying .project-hero h1 { font-family:"Noto Serif SC","Songti SC",SimSun,serif; font-size:clamp(46px,6.8vw,88px); line-height:1.2; letter-spacing:.04em; font-weight:600; }
+.project-shuangying .project-lead { font-size:19px; color:var(--muted); margin-top:18px; letter-spacing:.12em; }
+.project-shuangying .project-meta { display:grid; gap:10px; border-left:1px solid var(--line); padding-left:26px; font-size:12px; color:var(--muted); }
+.project-shuangying .project-hero-media { position:relative; margin:0 0 28px; }
+.project-shuangying .project-hero-media img { width:100%; aspect-ratio:2.15; object-fit:cover; }
+.project-shuangying .project-hero-media figcaption { display:flex; justify-content:space-between; gap:20px; font-size:11px; color:var(--muted); margin-top:14px; }
+.project-shuangying .duality-caption { display:grid; grid-template-columns:1fr 1fr; margin-top:0; }
+.duality-caption span { padding:14px 0; font-size:12px; letter-spacing:.16em; border-top:2px solid var(--accent); color:var(--accent); }
+.duality-caption span+span { text-align:right; border-color:var(--cool); color:var(--cool); }
+.project-shuangying .project-section { display:grid; grid-template-columns:.82fr 1.18fr; gap:8%; padding:76px 0; border-bottom:1px solid var(--line); }
+.project-shuangying h2 { font-family:"Noto Serif SC","Songti SC",SimSun,serif; font-size:clamp(28px,3.2vw,42px); font-weight:500; line-height:1.55; letter-spacing:.025em; }
+.project-shuangying .project-section-copy { padding-top:28px; }
+.project-shuangying .project-section-copy>p { color:var(--muted); font-size:15px; line-height:2; }
+.project-shuangying .project-highlight { color:var(--accent); font-size:13px; line-height:1.9; border-left:2px solid var(--accent); margin-top:24px; padding:6px 0 6px 20px; }
+.project-shuangying .project-section-title--row { display:flex; align-items:end; justify-content:space-between; gap:24px; grid-column:1/-1; }
+.project-shuangying .project-section-title--row>span { font-size:12px; color:var(--muted); }
+.project-shuangying .project-video,.project-shuangying .project-test { display:block; }
+.project-shuangying .project-video video { margin-top:30px; }
+.project-role-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; }
+.project-role { padding:28px 24px; background:#2b2820; border-top:2px solid var(--accent); }
+.project-role--yin { background:#1e2b30; border-color:var(--cool); }
+.project-role__symbol { display:block; color:var(--accent); font:46px/1.2 SimSun,serif; margin-bottom:36px; }
+.project-role--yin .project-role__symbol { color:var(--cool); }
+.project-role h3 { font-size:20px; font-weight:500; }
+.project-role h3 small { display:block; font-size:11px; color:var(--muted); margin-top:5px; }
+.project-role p { color:var(--muted); font-size:13px; line-height:1.95; margin-top:18px; }
+.project-pillar-list { grid-column:1/-1; display:grid; grid-template-columns:1fr 1fr; gap:0 55px; }
+.project-pillar-list article { display:grid; grid-template-columns:30px 1fr; gap:14px; padding:24px 0; border-top:1px solid var(--line); }
+.project-pillar-list article>span,.project-level-list>div>span { color:var(--accent); font:12px Consolas,monospace; }
+.project-pillar-list h3 { font-size:18px; font-weight:500; }
+.project-pillar-list p { color:var(--muted); font-size:13px; margin-top:10px; line-height:1.9; }
+.project-level-list>div { position:relative; display:grid; grid-template-columns:32px 1fr; gap:8px 18px; border-left:1px solid var(--line); padding:0 0 28px 26px; }
+.project-level-list>div::before { content:""; position:absolute; width:7px; height:7px; left:-4px; top:8px; background:var(--accent); border-radius:50%; }
+.project-level-list strong { font-size:16px; font-weight:550; }
+.project-level-list p { grid-column:2; font-size:13px; color:var(--muted); line-height:1.8; }
+.project-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; margin-top:34px; }
+.project-metrics div { padding:22px 0; border-top:1px solid var(--line); }
+.project-metrics strong { display:block; font-size:40px; font-weight:400; color:var(--accent); }
+.project-metrics span { font-size:12px; color:var(--muted); }
+.project-test-note { margin-top:18px; font-size:13px; color:var(--muted); }
+.project-contribution ul { list-style:none; }
+.project-contribution li { padding:14px 0; border-bottom:1px solid var(--line); color:var(--muted); font-size:14px; line-height:1.85; }
+/* 秘密入侵 — a tactical dossier with a mission rail and system ledger. */
+.project-invasion { --paper:#11191b; --surface:#1a2528; --ink:#eef2ef; --muted:#aebdbd; --line:#354347; --accent:#ebac5c; --cool:#8ec6b1; }
+.invasion-hero { display:grid; grid-template-columns:.85fr 1.15fr; gap:50px; align-items:center; padding:58px 0 48px; }
+.invasion-hero h1 { font-size:clamp(46px,5.8vw,76px); line-height:1.1; letter-spacing:-.05em; }
+.invasion-hero .hero-subtitle { font-size:21px; font-weight:550; margin:20px 0 15px; }
+.invasion-hero .hero-copy { font-size:14px; line-height:1.95; color:var(--muted); max-width:410px; }
+.invasion-hero figure { margin:0; min-width:0; }
+.invasion-hero figure img { width:100%; aspect-ratio:1.35; object-fit:cover; }
+.invasion-hero figcaption { display:flex; justify-content:space-between; gap:15px; padding-top:12px; color:var(--muted); font:11px/1.8 Consolas,monospace; }
+.dossier-meta { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); padding:22px 0; gap:20px; }
+.dossier-meta dt { color:var(--muted); font-size:11px; margin-bottom:6px; }
+.dossier-meta dd { font-size:14px; }
+.mission-strip { display:grid; grid-template-columns:repeat(5,1fr); list-style:none; border:1px solid var(--line); margin:32px 0 0; }
+.mission-strip li { padding:20px; border-right:1px solid var(--line); }
+.mission-strip li:last-child { border:0; background:#382d22; }
+.mission-strip span { color:var(--muted); font:11px Consolas,monospace; }
+.mission-strip strong { display:block; margin-top:10px; font-size:16px; font-weight:550; }
+.mission-strip .alert { color:var(--accent); }
+.dossier-section { display:grid; grid-template-columns:230px 1fr; gap:55px; padding:70px 0; border-bottom:1px solid var(--line); }
+.dossier-section h2 { font-size:28px; line-height:1.4; letter-spacing:-.025em; font-weight:600; }
+.dossier-section h3 { font-size:18px; line-height:1.5; }
+.dossier-copy p { color:var(--muted); font-size:14px; line-height:2; }
+.dossier-copy>p+p { margin-top:16px; }
+.dossier-section video { margin-top:25px; }
+.dossier-section .highlights-grid { display:grid; grid-template-columns:1fr 1fr; gap:28px 34px; margin-top:0; }
+.dossier-section .highlight-card { padding:20px 0 0; border-top:1px solid var(--line); }
+.dossier-section .highlight-card strong { font-size:16px; font-weight:600; color:var(--ink); }
+.dossier-section .highlight-card p { font-size:13px; margin-top:10px; }
+.dossier-section .info-list { list-style:none; }
+.dossier-section .info-list li { position:relative; color:var(--muted); padding:16px 0 16px 23px; border-bottom:1px solid var(--line); font-size:14px; line-height:1.9; }
+.dossier-section .info-list li::before { content:""; position:absolute; left:0; top:26px; width:5px; height:5px; background:var(--cool); }
+.dossier-section .info-list strong { color:var(--ink); font-weight:550; }
+.dossier-section.systems .highlights-grid { grid-template-columns:1fr; gap:0; }
+.dossier-section.systems .highlight-card { display:grid; grid-template-columns:135px 1fr; gap:30px; padding:22px 0; }
+.dossier-section.systems .highlight-card p { margin:0; }
+.dossier-section.pacing { border-top:2px solid var(--accent); margin-top:-1px; }
+.dossier-section.pacing .highlight-card:nth-child(3) { border-color:var(--accent); }
+@media(max-width:900px) {
+ .invasion-hero { gap:28px; grid-template-columns:1fr 1fr; }
+ .dossier-section { grid-template-columns:180px 1fr; gap:30px; }
+ .project-shuangying .project-section { gap:35px; }
+ .project-role-grid { grid-template-columns:1fr; }
+ .project-role__symbol { margin-bottom:16px; }
+}
+@media(max-width:700px) {
+ html { scroll-padding-top:145px; }
+ .case-shell { width:calc(100% - 36px); }
+ .game-case .site-nav { padding:16px 0; }
+ .case-contents { gap:14px 22px; }
+ .project-shuangying .project-hero { grid-template-columns:1fr; gap:28px; padding:40px 0 32px; }
+ .project-shuangying .project-meta { border-left:0; padding:0; gap:5px; }
+ .project-shuangying .project-hero h1 { font-size:46px; }
+ .project-shuangying .project-lead { font-size:16px; letter-spacing:.04em; }
+ .project-shuangying .project-hero-media img { aspect-ratio:1.5; }
+ .project-shuangying .project-hero-media figcaption { flex-direction:column; gap:4px; }
+ .project-shuangying .project-section { grid-template-columns:1fr; padding:45px 0; gap:24px; }
+ .project-shuangying .project-section-copy { padding:0; }
+ .project-shuangying .project-section-title--row { flex-direction:column; align-items:start; gap:12px; }
+ .project-role-grid { grid-template-columns:1fr 1fr; }
+ .project-role { padding:22px 16px; }
+ .project-role h3 { font-size:18px; }
+ .project-pillar-list { grid-template-columns:1fr; }
+ .project-metrics { gap:15px; }
+ .project-metrics strong { font-size:30px; }
+ .project-metrics span { font-size:11px; }
+ .invasion-hero { grid-template-columns:1fr; padding:38px 0 30px; gap:30px; }
+ .invasion-hero figure img { aspect-ratio:16/10; }
+ .dossier-meta { grid-template-columns:1fr 1fr; gap:18px; }
+ .mission-strip { grid-template-columns:1fr; margin-top:24px; }
+ .mission-strip li { display:flex; align-items:center; gap:20px; padding:13px 18px; border-right:0; border-bottom:1px solid var(--line); }
+ .mission-strip strong { margin:0; font-size:14px; }
+ .dossier-section { grid-template-columns:1fr; gap:25px; padding:45px 0; }
+ .dossier-section .highlights-grid { grid-template-columns:1fr; gap:20px; }
+ .dossier-section.systems .highlight-card { grid-template-columns:1fr; gap:10px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }

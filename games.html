@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -25,8 +25,8 @@
     </div>
 
     <section class="games-overview" aria-label="项目概览">
-        <div><strong>05</strong><span>项目总数</span></div>
-        <div><strong>02</strong><span>个人项目</span></div>
+        <div><strong>06</strong><span>项目总数</span></div>
+        <div><strong>03</strong><span>个人项目</span></div>
         <div><strong>04</strong><span>可试玩项目</span></div>
         <div><strong>01</strong><span>进行中</span></div>
     </section>
@@ -48,18 +48,31 @@
     // ============================================================
     const gamesData = [
         {
+            title: "拼豆时光·休闲创作Demo",
+            status: "展示页",
+            projectId: "202608",
+            year: "2026",
+            format: "个人项目",
+            tags: ["全功能独立完成", "Unity / C#", "休闲创作", "系统设计"],
+            desc: "全部功能由我一人完成。包含照图拼豆、自由创作、图片转换、熨烫成品、3D图鉴与离线分享，连接从制作到收藏的完整体验。",
+            thumbnail: "Games/拼豆时光/media/menu.png",
+            link: "Games/拼豆时光/202608_拼豆时光.html"
+        },
+        {
             title: "超市模拟器·模拟经营Demo(进行中)",
             status: "进行中",
+            projectId: "202605",
             year: "2026",
             format: "合作项目",
             tags: ["合作项目","玩法设计","模拟经营","多人合作"],
             desc: "一款开超市的模拟经营游戏。玩家需要进货并合理定价这些商品，将它们出售给顾客从而获利。赚取的钱财可以用于招募NPC角色；解锁更多超市结构（扩建）；更多功能玩法（超市外送）等，从而达成循环升级的目的。",
-            thumbnail: "Images/占位图.png",
-            link: "games.html"
+            thumbnail: "Games/超市模拟器/InGame1.png",
+            link: "Games/超市模拟器/202605_超市模拟器.html"
         },
         {
             title: "符影双生·合作解谜Demo",
             status: "可试玩",
+            projectId: "202604",
             year: "2026",
             format: "个人项目",
             tags: ["个人项目","关卡设计","玩法设计","合作解谜","双人同屏"],
@@ -70,6 +83,7 @@
         {
             title: "R00T.5·蒸汽朋克节奏探索Demo",
             status: "已完成",
+            projectId: "202302",
             year: "2023",
             format: "Game Jam",
             tags: ["节奏探索","蒸汽朋克","Game Jam"],
@@ -80,16 +94,18 @@
         {
             title: "Laugh Lift·休闲点击Demo",
             status: "已完成",
+            projectId: "202401",
             year: "2024",
             format: "Game Jam",
             tags: ["休闲点击", "UE4蓝图", "快速原型", "范围管理"],
             desc: "Global Game Jam 2024 72小时4人团队休闲点击游戏，通过精准点击让角色不断上升，并用笑声强化主题体验。",
-            thumbnail: "Images/占位图.png",
+            thumbnail: "Games/LaughLift/Cover.png",
             link: "Games/LaughLift/202401_LaughLift.html"
         },
         {
             title: "秘密入侵·技能FPSDemo",
             status: "可试玩",
+            projectId: "202602",
             year: "2026",
             format: "个人项目",
             tags: ["个人项目","任务设计","技能设计","FPS"],
@@ -99,6 +115,9 @@
         }
     ];
     // ============================================================
+
+    // 项目编号为 YYYYNN，按年份和年度项目序号倒序排列。
+    gamesData.sort((a, b) => Number(b.projectId) - Number(a.projectId));
 
     let currentView = 'card';
 

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="独立完成全部功能的 Unity 休闲拼豆创作 Demo：拼豆编辑、图片转换、熨烫、3D成品、图鉴与离线分享。">
+  <meta name="game-title" content="拼豆时光">
+  <meta name="game-tags" content="个人项目,Unity,C#,休闲创作,系统设计,独立开发">
+  <meta name="game-desc" content="从图纸拼豆、自由创作与图片转换，到熨烫、3D收藏与离线分享的完整休闲创作 Demo。">
+  <meta name="game-thumb" content="Games/拼豆时光/media/menu.png">
+  <meta name="game-project-id" content="202608">
+  <title>拼豆时光 · 个人项目| 陶明轩</title>
+  <link rel="stylesheet" href="../../css/style.css">
+  <style>
+    :root { --ink:#10243e; --muted:#526573; --line:#d4dddf; --paper:#faf8f3; --coral:#c7422c; --teal:#296c60; --blue:#2555d9; }
+    html { scroll-behavior:smooth; scroll-padding-top:100px; }
+    body { color:var(--ink); background:var(--paper); --home-ink:var(--ink); --home-muted:var(--muted); --home-line:var(--line); --home-orange:var(--coral); --home-blue:var(--blue); }
+    a { color:inherit; } button { font:inherit; cursor:pointer; } img { max-width:100%; display:block; } [hidden] { display:none !important; }
+    :focus-visible { outline:3px solid var(--blue); outline-offset:5px; }
+    .skip { position:fixed; top:-100px; left:16px; z-index:100; background:white; padding:12px 20px; } .skip:focus { top:12px; }
+    .shell { width:min(1200px, 90%); margin:auto; }
+    .site-nav { width:100%; margin:0; background:rgba(250,248,243,.96); border-color:var(--line); }
+    .back-link { display:inline-block; margin:28px 0 0; color:var(--muted); font-size:13px; text-decoration:none; }
+    .hero { display:grid; grid-template-columns:.86fr 1.14fr; align-items:center; gap:50px; padding:58px 0 65px; }
+    .hero h1 { font-size:clamp(48px,6.1vw,82px); line-height:1.1; letter-spacing:-.055em; font-weight:850; }
+    .hero .tagline { margin:20px 0 16px; font-size:clamp(19px,2vw,25px); font-weight:600; line-height:1.65; }
+    .hero .intro { color:var(--muted); font-size:15px; line-height:1.9; max-width:440px; }
+    .ownership { display:flex; align-items:center; gap:11px; margin:25px 0 18px; font-size:14px; font-weight:750; }
+    .ownership::before { content:""; width:10px; height:10px; border:3px solid var(--coral); border-radius:50%; flex-shrink:0; }
+    .tags { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 25px; } .tags span { padding:4px 10px; border:1px solid var(--line); border-radius:4px; font-size:11px; color:var(--muted); }
+    .actions { display:flex; flex-wrap:wrap; gap:10px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:16px; min-height:46px; padding:10px 20px; border:1px solid var(--ink); border-radius:5px; font-size:13px; font-weight:650; text-decoration:none; background:transparent; color:var(--ink); transition:background .15s,color .15s; }
+    .btn.primary { color:white; background:var(--ink); } .btn:hover { color:white; background:var(--teal); border-color:var(--teal); }
+    .hero-media { position:relative; padding:25px; border-radius:14px; background:#e7eeeb; background-image:radial-gradient(#a7beb4 1px,transparent 1px); background-size:15px 15px; }
+    .hero-media::before { content:""; display:block; width:64px; height:8px; background:var(--coral); margin-bottom:18px; }
+    .shot { display:block; padding:0; width:100%; border:0; border-radius:6px; overflow:hidden; background:#dce6e9; text-align:left; }
+    .shot img { width:100%; height:auto; transition:filter .2s; } .shot:hover img { filter:brightness(1.04); }
+    .hero-media figcaption { display:flex; justify-content:space-between; gap:12px; margin-top:14px; font-size:11px; color:var(--teal); }
+    .summary-rail { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 0; gap:25px; }
+    .summary-rail span { display:block; font-size:11px; color:var(--muted); margin-bottom:6px; } .summary-rail strong { font-size:15px; }
+    .contents { display:flex; flex-wrap:wrap; gap:10px 26px; margin:25px 0 0; font-size:12px; color:var(--muted); } .contents a { text-decoration:none; } .contents a:hover { color:var(--coral); }
+    section { padding:78px 0; scroll-margin-top:20px; }
+    .section-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:25px; margin-bottom:30px; }
+    .section-index { font:12px/1.3 Consolas,monospace; color:var(--coral); display:block; margin-bottom:12px; letter-spacing:.08em; }
+    h2 { font-size:clamp(27px,3.3vw,42px); line-height:1.3; letter-spacing:-.04em; } h3 { font-size:19px; line-height:1.5; }
+    .section-heading>p { max-width:400px; color:var(--muted); font-size:14px; line-height:1.8; }
+    .demo-layout { display:grid; grid-template-columns:1fr 265px; gap:32px; align-items:start; }
+    .demo-stage { background:#e9efef; padding:12px; border-radius:10px; }
+    .stage-caption { display:flex; justify-content:space-between; gap:15px; font-size:12px; padding:14px 5px 2px; color:var(--muted); }
+    .stage-caption strong { color:var(--ink); }
+    .step-list { display:grid; gap:0; }
+    .step-button { display:grid; grid-template-columns:28px 1fr; gap:10px; width:100%; padding:17px 12px; text-align:left; background:transparent; border:0; border-bottom:1px solid var(--line); border-left:3px solid transparent; color:var(--ink); border-radius:0; }
+    .step-button>span { font:12px/1.6 Consolas,monospace; color:var(--muted); }
+    .step-button strong { display:block; font-size:14px; } .step-button small { display:block; margin-top:5px; color:var(--muted); font-size:12px; line-height:1.7; }
+    .step-button[aria-pressed="true"] { border-left-color:var(--coral); background:#f0e9df; }
+    .media-note { color:var(--muted); font-size:12px; margin-top:20px; line-height:1.8; }
+    .loop-section { border-top:1px solid var(--line); }
+    .loop { display:grid; grid-template-columns:repeat(5,1fr); margin:35px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); list-style:none; padding:0; }
+    .loop li { position:relative; padding:25px 18px 25px 0; } .loop li:not(:last-child)::after { content:"→"; position:absolute; top:35px; right:15px; color:var(--coral); }
+    .loop span { font:11px Consolas,monospace; color:var(--muted); } .loop strong { display:block; margin-top:8px; font-size:15px; }
+    .pillars { display:grid; grid-template-columns:repeat(3,1fr); gap:38px; } .pillars h3 { margin-bottom:10px; } .pillars p,.feature-copy p { font-size:14px; line-height:1.95; color:var(--muted); }
+    .features-section { border-top:1px solid var(--line); }
+    .feature { display:grid; grid-template-columns:200px 1fr; padding:32px 0; border-top:1px solid var(--line); gap:45px; }
+    .feature-number { font:11px Consolas,monospace; color:var(--teal); } .feature h3 { margin-top:8px; font-size:22px; }
+    .feature-copy { display:grid; grid-template-columns:1fr 240px; gap:30px; align-items:start; }
+    .feature-copy .mine { font-size:12px; color:var(--teal); padding-left:12px; border-left:2px solid var(--teal); margin-top:15px; }
+    .feature-copy figure figcaption { font-size:11px; color:var(--muted); margin-top:7px; }
+    details { margin-top:16px; font-size:13px; } summary { cursor:pointer; color:var(--ink); padding:8px 0; } details p { margin:8px 0 0; }
+    .contribution { padding:60px; color:white; background:var(--ink); border-radius:10px; }
+    .contribution .section-index { color:#ffb19e; } .contribution .section-heading { align-items:flex-start; }
+    .contribution .section-heading>p { color:#c3d1dc; } .role-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:26px 50px; margin-top:34px; }
+    .role { border-top:1px solid #536273; padding-top:20px; } .role h3 { font-size:17px; } .role p { margin-top:10px; color:#c3d1dc; font-size:13px; line-height:1.9; }
+    .iterations { padding-top:85px; }
+    .case { display:grid; grid-template-columns:45px 1fr 1fr; gap:28px; padding:30px 0; border-top:1px solid var(--line); }
+    .case>span { color:var(--coral); font:14px Consolas,monospace; padding-top:6px; } .case h3 { margin-bottom:10px; } .case p { font-size:13px; line-height:1.95; color:var(--muted); }
+    .case .result { background:#e9efeb; padding:18px 22px; border-radius:5px; } .result b { display:block; color:var(--teal); font-size:12px; margin-bottom:6px; }
+    .delivery { display:grid; grid-template-columns:1fr 1fr; gap:60px; border-top:1px solid var(--line); }
+    .delivery p { color:var(--muted); font-size:14px; line-height:1.9; margin:18px 0; } .delivery dl { display:grid; grid-template-columns:85px 1fr; gap:14px; font-size:13px; margin-top:30px; } dt { color:var(--muted); }
+    .status-box { border:1px solid var(--line); border-radius:7px; padding:28px; } .status-box h3 { font-size:17px; } .status-box p { font-size:13px; margin:14px 0 0; }
+    .status-line { display:flex; align-items:center; gap:10px; color:var(--teal); font-size:13px; font-weight:650; margin-top:20px; } .status-line::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--teal); }
+    footer { display:flex; justify-content:space-between; gap:20px; border-top:1px solid var(--line); padding:26px 0 38px; color:var(--muted); font-size:12px; } footer a { text-decoration:none; }
+    dialog { width:min(1180px,94vw); max-height:92vh; padding:12px; border:0; border-radius:10px; background:var(--paper); color:var(--ink); margin:auto; overflow:auto; }
+    dialog::backdrop { background:rgba(8,20,34,.82); } .lightbox-top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:3px 4px 12px; } .lightbox-top p { font-size:13px; } .close { background:white; border:1px solid var(--line); border-radius:4px; padding:8px 16px; flex-shrink:0; } dialog img { width:100%; object-fit:contain; max-height:76vh; }
+    body.modal-open { overflow:hidden; }
+    @media (max-width:1000px) { .hero { gap:28px; } .feature-copy { grid-template-columns:1fr 190px; } .feature { grid-template-columns:160px 1fr; gap:25px; } .contribution { padding:38px; } }
+    @media (max-width:760px) { html { scroll-padding-top:140px; } .hero { grid-template-columns:1fr; padding:35px 0; gap:32px; } .hero .intro { max-width:none; } .hero-media { padding:18px; } .summary-rail { grid-template-columns:1fr 1fr; gap:20px; } .section-heading { display:block; } .section-heading>p { margin-top:16px; max-width:none; } section { padding:52px 0; } .demo-layout { grid-template-columns:1fr; gap:18px; } .step-list { grid-template-columns:1fr 1fr; } .step-button { padding:12px 8px; } .loop { grid-template-columns:1fr 1fr; } .loop li { padding:17px 10px; } .loop li:not(:last-child)::after { display:none; } .pillars { grid-template-columns:1fr; gap:25px; } .feature,.feature-copy { grid-template-columns:1fr; gap:20px; } .feature-copy figure { max-width:500px; } .contribution { padding:30px 24px; } .role-grid { grid-template-columns:1fr; gap:24px; } .case { grid-template-columns:25px 1fr; gap:15px; } .case .result { grid-column:2; } .delivery { grid-template-columns:1fr; gap:30px; } footer { flex-wrap:wrap; } .stage-caption { flex-wrap:wrap; } }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none !important; } }
+    @media print { .site-nav,.contents,.actions,.back-link,dialog { display:none; } section { padding:25px 0; } .hero { padding:20px 0; } .contribution { color:var(--ink); background:#eee; } .contribution .role p,.contribution .section-heading>p { color:var(--muted); } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <nav class="site-nav" aria-label="主导航">
+    <a class="site-nav__brand" href="../../index.html"><span class="site-nav__mark">T</span><span>陶明轩 <small>GAME DESIGN</small></span></a>
+    <div class="site-nav__links"><a href="../../games.html" aria-current="true"><span>↗</span>游戏原型</a><a href="../../designs.html"><span>↗</span>策划案</a><a href="../../analysis.html"><span>↗</span>系统拆解</a><a href="../../about.html"><span>↗</span>关于我</a></div>
+  </nav>
+  <main class="shell" id="main">
+    <a class="back-link" href="../../games.html">← 游戏原型 / 个人项目</a>
+    <header class="hero">
+      <div>
+        <h1>拼豆时光</h1>
+        <p class="tagline">把一颗颗彩色拼豆，<br>做成可以收藏与分享的作品。</p>
+        <p class="intro">一款基于 Unity 开发的休闲拼豆创作 Demo。从照图制作与自由创作，到熨烫成品、图鉴收藏与离线分享，构成完整的制作体验。</p>
+        <p class="ownership">个人独立项目</p>
+        <div class="tags" aria-label="项目标签"><span>Unity / C#</span><span>休闲创作</span><span>系统设计</span><span>独立开发</span></div>
+        <div class="actions"><a class="btn primary" href="#demo">查看实机展示 <span aria-hidden="true">↗</span></a><a class="btn" href="#contribution">我的设计与实现 <span aria-hidden="true">↓</span></a></div>
+      </div>
+      <figure class="hero-media">
+        <a class="shot zoom" href="media/menu.png" data-caption="主页：展示已收藏的拼豆成品" aria-label="放大主页实机截图"><img src="media/menu.png" alt="拼豆时光主页，包含官方关卡、自定义创作、收集图鉴与爱心成品展示" width="1280" height="720" fetchpriority="high"></a>
+        <figcaption><span>实机截图</span><span>点击放大 ↗</span></figcaption>
+      </figure>
+    </header>
+    <div class="summary-rail" aria-label="项目概览"><div><span>项目形式</span><strong>个人独立开发</strong></div><div><span>开发工具</span><strong>Unity 2022 / C#</strong></div><div><span>体验类型</span><strong>拼豆制作与自由创作</strong></div><div><span>功能范围</span><strong>制作 · 成品 · 收藏 · 分享</strong></div></div>
+    <nav class="contents" aria-label="页内目录"><a href="#demo">01 实机展示</a><a href="#loop">02 核心玩法</a><a href="#features">03 功能系统</a><a href="#contribution">04 独立开发</a><a href="#iterations">05 迭代案例</a><a href="#delivery">06 项目资料</a></nav>
+
+    <section id="demo" aria-labelledby="demo-title">
+      <div class="section-heading"><div><span class="section-index">01 / IN GAME</span><h2 id="demo-title">从第一颗豆子，<br>到属于自己的成品。</h2></div><p>按制作流程查看真实游戏画面。选择右侧阶段，了解操作、反馈与作品完成后的去向。</p></div>
+      <div class="demo-layout">
+        <figure class="demo-stage"><a class="shot zoom" id="stage-link" href="media/board-feedback.png" data-caption="拼豆编辑：色板、工具、参考图与错误反馈" aria-label="放大当前阶段实机截图"><img id="stage-image" src="media/board-feedback.png" alt="拼豆编辑界面，错误位置显示红框、红色色号和叉号" width="1280" height="720" loading="lazy"></a><figcaption class="stage-caption" aria-live="polite"><strong id="stage-title">拼豆编辑与错误反馈</strong><span>实机截图 · 点击放大</span></figcaption></figure>
+        <div class="step-list" role="group" aria-label="选择展示阶段">
+          <button class="step-button" type="button" aria-pressed="true" data-src="media/board-feedback.png" data-title="拼豆编辑与错误反馈" data-alt="拼豆编辑界面，错误位置显示红框、红色色号和叉号"><span>01</span><span><strong>对照图案，逐次拼豆</strong><small>参考图、选色、画笔与错误标记。</small></span></button>
+          <button class="step-button" type="button" aria-pressed="false" data-src="media/ironing.png" data-title="熨烫过程中的逐区融合" data-alt="小屋拼豆图案正在熨烫，左下区域已经融合，右上仍保留豆孔"><span>02</span><span><strong>熨烫，让作品成形</strong><small>从带孔豆子到平整成品的过渡。</small></span></button>
+          <button class="step-button" type="button" aria-pressed="false" data-src="media/product.png" data-title="成品展示与图鉴收录" data-alt="爱心厚体素成品，已收录图鉴，可旋转查看并分享代码"><span>03</span><span><strong>旋转查看，收藏成品</strong><small>厚体素、透视镜头与落地阴影。</small></span></button>
+          <button class="step-button" type="button" aria-pressed="false" data-src="media/free-creation.png" data-title="自由创作与64色色板" data-alt="自由创作界面，矩形画布上放置五颗拼豆，左侧显示工具和64色色板"><span>04</span><span><strong>自由创作自己的图案</strong><small>自定义画布与64种实体颜色。</small></span></button>
+          <button class="step-button" type="button" aria-pressed="false" data-src="media/share-preview.png" data-title="128×128作品代码导入预览" data-alt="128乘128作品分享预览，原作品和还原目标并排显示，包含64种颜色"><span>05</span><span><strong>离线分享，再次制作</strong><small>代码导入先校验，再预览并开始。</small></span></button>
+        </div>
+      </div>
+      <p class="media-note">当前以实机截图展示，演示视频尚未加入。截图来自 V5 构建的自动验证流程，用于呈现实际渲染与功能状态。</p>
+    </section>
+
+    <section class="loop-section" id="loop" aria-labelledby="loop-title">
+      <div class="section-heading"><div><span class="section-index">02 / CORE LOOP</span><h2 id="loop-title">让制作本身，成为乐趣。</h2></div><p>将手工拼豆拆解为可操作的规则，让选择、放置、修正与完成都有清晰反馈。</p></div>
+      <ol class="loop"><li><span>01</span><strong>选择图案</strong></li><li><span>02</span><strong>对照参考拼豆</strong></li><li><span>03</span><strong>检查并修正</strong></li><li><span>04</span><strong>熨烫成品</strong></li><li><span>05</span><strong>收藏与分享</strong></li></ol>
+      <div class="pillars"><article><h3>保留手工制作感</h3><p>普通画笔逐次放置，不直接覆盖已有豆子。不同范围的工具在精细操作与批量放置之间提供选择。</p></article><article><h3>允许试错，明确反馈</h3><p>照图模式允许放错颜色或位置，用红色色号、边框和标记提示。玩家通过移除后重放完成修正。</p></article><article><h3>给完成一个仪式</h3><p>熨烫从左下向右上推进，豆孔逐区转为融合表面。完成后进入3D查看与图鉴，留下制作成果。</p></article></div>
+    </section>
+
+    <section class="features-section" id="features" aria-labelledby="features-title">
+      <div class="section-heading"><div><span class="section-index">03 / SYSTEMS</span><h2 id="features-title">四组系统，连接完整体验。</h2></div><p>每项功能都围绕同一份作品数据展开，将创作过程、完成反馈与长期收藏串联起来。</p></div>
+      <article class="feature"><div><span class="feature-number">SYSTEM 01</span><h3>拼豆操作<br>与即时反馈</h3></div><div class="feature-copy"><div><p>参考图与色板辅助对照制作；1×1、1×3、2×2画笔和移除笔形成工具组合。配合缩放、视图移动、各色剩余量、错误计数与末位空格提示，帮助玩家完成作品。</p><p class="mine">我的实现：独立完成棋盘编辑、工具判定、进度统计及错误与提示反馈。</p><details><summary>查看完成判定</summary><p>照图作品必须全部填对，且没有错色和额外豆子；自由创作没有标准答案，非空后由玩家主动确认完成。连续拼豆笔为锁定预留工具。</p></details></div><figure><a class="shot zoom" href="media/board-feedback.png" data-caption="错误反馈：应留空位置、错色与进度信息" aria-label="放大拼豆操作截图"><img src="media/board-feedback.png" alt="红色错误标记与拼豆工具栏" width="1280" height="720" loading="lazy"></a><figcaption>错误反馈与操作工具</figcaption></figure></div></article>
+      <article class="feature"><div><span class="feature-number">SYSTEM 02</span><h3>自定义<br>与图片转换</h3></div><div class="feature-copy"><div><p>可以从空白画布开始，也可以将图片转换为拼豆目标。图片转换保持原图比例，将图像映射到固定64色色板；自由创作则保留玩家对图案和留白的决定。</p><p class="mine">我的实现：独立完成图片读取、网格转换、颜色映射及转换结果与棋盘的接入。</p><details><summary>查看数据处理</summary><p>转换结果保存为网格颜色数据，原图删除后仍能继续制作。V5记录支持最高128×128自定义网格；最终可下载版本的尺寸范围将在发布包确认后标注。</p></details></div><figure><a class="shot zoom" href="media/free-creation.png" data-caption="自由创作：矩形画布与64色色板" aria-label="放大自由创作截图"><img src="media/free-creation.png" alt="矩形自由创作画布与64色色板" width="1280" height="720" loading="lazy"></a><figcaption>空白画布上的自由创作</figcaption></figure></div></article>
+      <article class="feature"><div><span class="feature-number">SYSTEM 03</span><h3>熨烫成品<br>与图鉴收藏</h3></div><div class="feature-copy"><div><p>通过逐区熨烫表现完成过程，生成保留空洞的厚体素成品。透视镜头、哑光材质、三点布光与阴影提供形体层次，作品可旋转查看并永久收录图鉴。</p><p class="mine">我的实现：独立完成熨烫过渡、成品生成、展示交互与图鉴收录流程。</p><details><summary>查看收藏规则</summary><p>官方作品按关卡标识去重，重复完成更新用时记录；自定义成品支持独立收藏与确认删除。主页可展示已收藏的作品。</p></details></div><figure><a class="shot zoom" href="media/product.png" data-caption="爱心成品：透视、厚度与三点布光" aria-label="放大3D成品截图"><img src="media/product.png" alt="具有厚度和阴影的爱心成品" width="1280" height="720" loading="lazy"></a><figcaption>从棋盘数据生成3D成品</figcaption></figure></div></article>
+      <article class="feature"><div><span class="feature-number">SYSTEM 04</span><h3>保存进度<br>与离线分享</h3></div><div class="feature-copy"><div><p>编辑进度和完成作品支持本地保存。成品可生成文本分享码，接收者离线导入后先查看目标预览，再从空棋盘开始制作自己的版本。</p><p class="mine">我的实现：独立完成存档恢复、作品编码解码、复制导入与数据校验。</p><details><summary>查看分享设计</summary><p>保留实体颜色与空白位置，加入版本识别和损坏校验；兼容旧格式。导入作品不直接计为完成，也不推进官方奖励。协议在迭代中升级，展示页不固定旧版本码样式。</p></details></div><figure><a class="shot zoom" href="media/share-preview.png" data-caption="分享导入：原作品与还原目标对照" aria-label="放大分享导入截图"><img src="media/share-preview.png" alt="分享作品与还原目标的并排预览" width="1280" height="720" loading="lazy"></a><figcaption>作品分享与还原预览</figcaption></figure></div></article>
+    </section>
+
+    <section class="contribution" id="contribution" aria-labelledby="contribution-title">
+      <div class="section-heading"><div><span class="section-index">04 / MY CONTRIBUTION</span><h2 id="contribution-title">全部功能，<br>由我独立完成。</h2></div><p>我一人负责全部功能的设计与开发，涵盖拼豆编辑、关卡流程、自定义创作、图片转换、熨烫、3D展示、图鉴、离线分享、存档与设置，并完成各系统整合与持续迭代。</p></div>
+      <div class="role-grid"><article class="role"><h3>01 / 玩法与系统设计</h3><p>制定制作循环、工具规则、完成条件、关卡推进，以及创作、收藏和分享之间的关系。</p></article><article class="role"><h3>02 / 交互与反馈设计</h3><p>设计色板、参考图、工具栏和视图操作；以错误提示、剩余量与完成反馈辅助制作。</p></article><article class="role"><h3>03 / 功能开发与整合</h3><p>实现网格数据、图像处理、分享编码、本地保存、熨烫与成品展示，接通完整流程。</p></article><article class="role"><h3>04 / 问题定位与迭代</h3><p>根据实际运行问题调整操作、显示和数据规则，进行相关功能验证并整理构建结果。</p></article></div>
+    </section>
+
+    <section class="iterations" id="iterations" aria-labelledby="iterations-title">
+      <div class="section-heading"><div><span class="section-index">05 / ITERATION</span><h2 id="iterations-title">从实际问题，推进设计。</h2></div><p>精选三个迭代案例，展示我如何将体验问题转化为规则与实现调整。</p></div>
+      <article class="case"><span>01</span><div><h3>让最后几个空格更容易找到</h3><p>大图接近完成时，少量空位难以寻找，制作节奏容易变成反复搜索。于是加入有条件的末位空格高亮，并允许在设置中关闭。</p></div><div class="result"><b>调整结果</b><p>提示仅提供位置线索，不自动放置；维持手工完成的参与感。</p><details><summary>查看末位提示实机画面</summary><a class="shot zoom" href="media/hints.png" data-caption="接近完成时，最后三个空格出现高亮" aria-label="放大末位空格提示截图"><img src="media/hints.png" alt="进度95%的棋盘，最后三个空格有高亮边框" width="1280" height="720" loading="lazy"></a></details></div></article>
+      <article class="case"><span>02</span><div><h3>让熨烫与旋转展示保持稳定</h3><p>熨烫材质曾遮挡融合区域，成品旋转时地面与视距发生变化。调整显示方式，并让地面、旋转中心与展示视距保持稳定。</p></div><div class="result"><b>调整结果</b><p>已扫区域与未扫区域清晰区分，旋转成品时保持稳定的展示空间。</p><details><summary>查看熨烫实机画面</summary><a class="shot zoom" href="media/ironing.png" data-caption="熨烫时，平整成品区域与带孔拼豆区域同时可见" aria-label="放大熨烫过渡截图"><img src="media/ironing.png" alt="熨烫过程中可见融合区域与未融合区域的分界" width="1280" height="720" loading="lazy"></a></details></div></article>
+      <article class="case"><span>03</span><div><h3>保留完整色板，也保留留白</h3><p>64种实体颜色加空白，共有65种状态，固定6-bit无法全部容纳。分享协议迭代为能够保留全部状态的编码，并保留旧格式读取。</p></div><div class="result"><b>调整结果</b><p>分享目标完整保留颜色和空洞，导入前进行版本、长度与损坏校验。128×128导入样例用于检查大画布还原。</p></div></article>
+    </section>
+
+    <section class="delivery" id="delivery" aria-labelledby="delivery-title">
+      <div><span class="section-index">06 / PROJECT NOTES</span><h2 id="delivery-title">项目资料与展示版本</h2><p>展示从设计到实现的完整个人项目。全部功能由我独立完成，素材来源与验证方式单独记录。</p><dl><dt>引擎</dt><dd>Unity 2022.3.62f3c1</dd><dt>开发方式</dt><dd>C# · uGUI · 程序生成网格与成品</dd><dt>目标平台</dt><dd>Windows x64</dd><dt>截图来源</dt><dd>V5实际构建 · 自动验证流程</dd></dl><details><summary>素材与验证说明</summary><p>拼豆网格、成品模型、图案和音效由项目程序生成；中文字体采用 Noto Sans CJK SC（SIL OFL 1.1）。背景音乐为程序化生成。自动截图用于验证功能状态，真人试玩和主观音乐试听未在这些记录中完成。</p></details></div>
+      <aside class="status-box" aria-label="交付状态"><h3>当前展示说明</h3><div class="status-line">已加入真实游戏截图</div><p>演示视频与 Windows 下载包尚未加入，因此当前提供画面与设计说明。</p><p>最新关卡数量、色号及部分操作仍在迭代，截图保留当时版本界面。最终关卡规模与操作说明以之后发布的展示包为准。</p><p>截图用于展示实际渲染及功能，不代表当前最新版本的完整验收。</p><div class="actions" style="margin-top:24px"><a class="btn" href="../../about.html">关于我与联系方式 <span aria-hidden="true">↗</span></a></div></aside>
+    </section>
+    <footer><a href="../../games.html">← 返回游戏原型</a><span>陶明轩 · 拼豆时光 · 全功能独立开发</span><a href="#main">回到顶部 ↑</a></footer>
+  </main>
+  <dialog id="lightbox" aria-label="实机截图放大查看"><div class="lightbox-top"><p id="lightbox-caption"></p><button class="close" type="button">关闭 ×</button></div><img id="lightbox-image" alt=""></dialog>
+  <script>
+    // Replace screenshot files in media/ to update the gallery; use the same aspect ratio.
+    const stageImage = document.getElementById('stage-image');
+    const stageLink = document.getElementById('stage-link');
+    const stageTitle = document.getElementById('stage-title');
+    document.querySelectorAll('.step-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.step-button').forEach(item => item.setAttribute('aria-pressed', String(item === button)));
+        stageImage.src = button.dataset.src;
+        stageImage.alt = button.dataset.alt;
+        stageLink.href = button.dataset.src;
+        stageLink.dataset.caption = button.dataset.title;
+        stageTitle.textContent = button.dataset.title;
+      });
+    });
+    const lightbox = document.getElementById('lightbox');
+    let previousFocus;
+    document.querySelectorAll('.zoom').forEach(link => {
+      link.addEventListener('click', event => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof lightbox.showModal !== 'function') return;
+        event.preventDefault();
+        previousFocus = link;
+        document.getElementById('lightbox-image').src = link.href;
+        document.getElementById('lightbox-image').alt = link.querySelector('img').alt;
+        document.getElementById('lightbox-caption').textContent = link.dataset.caption;
+        lightbox.showModal();
+        document.body.classList.add('modal-open');
+      });
+    });
+    lightbox.querySelector('.close').addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', event => {
+      const bounds = lightbox.getBoundingClientRect();
+      if (event.target === lightbox && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) lightbox.close();
+    });
+    lightbox.addEventListener('close', () => {
+      document.body.classList.remove('modal-open');
+      previousFocus?.focus();
+    });
+  </script>
+</body>
+</html>

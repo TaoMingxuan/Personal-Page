@@ -9,68 +9,14 @@
     <meta name="game-tags" content="个人项目,UE5蓝图,潜入射击,任务设计,AI,关卡设计">
     <meta name="game-desc" content="一款基于 UE5 蓝图搭建的第一人称潜入与战术射击 Demo，包含角色、武器、AI、资源与关卡流程的完整原型验证。">
     <meta name="game-thumb" content="Games/秘密入侵/秘密入侵.png">
-    <meta name="game-date" content="202602">
+    <meta name="game-project-id" content="202602">
     <!-- ================================================= -->
 
     <title>《秘密入侵》 · 个人项目</title>
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/project.css">
+    <link rel="stylesheet" href="../../css/game-case.css">
 
-    <style>
-        .media-section {
-            background: rgba(0,0,0,0.3);
-            border-radius: 24px;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-        .media-section video, .media-section img {
-            max-width: 100%;
-            border-radius: 16px;
-        }
-        .media-section video {
-            display: block;
-        }
-        .content-block {
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid var(--border);
-        }
-        .content-block h2 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            border-left: 3px solid var(--accent);
-            padding-left: 0.8rem;
-        }
-        .highlights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .highlight-card {
-            background: rgba(255,255,255,0.03);
-            border-radius: 16px;
-            padding: 1rem;
-            border-left: 3px solid var(--accent);
-        }
-        .highlight-card p {
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
-        }
-        .info-list {
-            margin-left: 1.5rem;
-            margin-top: 0.8rem;
-            color: var(--text-secondary);
-        }
-        .media-caption {
-            font-size: 1rem;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-        }
-        .screenshot-carousel {
+    <style>        .screenshot-carousel {
           width:100%;
           /*max-width:900px;*/
           margin:0 auto;
@@ -164,42 +110,23 @@
             }
         }
 
-    </style>
-</head>
-<body class="project-page legacy-project">
-<div class="container">
+    
+.project-invasion .media-section { padding:50px 0; border-bottom:1px solid var(--line); } .project-invasion .media-caption { font-size:12px; color:var(--muted); margin-top:15px; } .project-invasion .carousel-dot.active { background:var(--accent); } .project-invasion .invasion-hero video { aspect-ratio:16/9; object-fit:contain; }</style></head>
+<body class="game-case project-invasion"><main class="case-shell">
 <nav class="site-nav" aria-label="主导航">
     <a class="site-nav__brand" href="../../index.html"><span class="site-nav__mark">T</span><span>陶明轩 <small>GAME DESIGN</small></span></a>
     <div class="site-nav__links"><a href="../../games.html"><span>↗</span>游戏原型</a><a href="../../designs.html"><span>↗</span>策划案</a><a href="../../analysis.html"><span>↗</span>系统拆解</a><a href="../../about.html"><span>↗</span>关于我</a></div>
 </nav>
-<a href="../../games.html" class="back-link">← 返回游戏列表</a>
-
-    <div class="game-header" style="text-align: center; margin-bottom: 2rem;">
-        <h1 style="font-size: 2.5rem; background: linear-gradient(135deg, var(--accent), #c7e9fb); -webkit-background-clip: text; background-clip: text; color: transparent;">《秘密入侵》-- 第一人称潜入射击 Demo</h1>
-        <div class="tags" style="justify-content: center;">
-            <span class="tag">个人项目</span>
-            <span class="tag">UE5蓝图</span>
-            <span class="tag">潜入射击</span>
-            <span class="tag">任务设计</span>
-            <span class="tag">敌人AI</span>
-            <span class="tag">关卡设计</span>
-            <span class="tag">2026.02</span>
-        </div>
-    </div>
-
-    <!-- 视频演示 -->
-    <div class="media-section">
-        <video
-            src="../../Games/秘密入侵/秘密入侵.mp4"
-            controls
-            style="width: 100%; height: 100%; object-fit: cover;"
-        >
-            浏览器不支持视频播放，请更换浏览器查看
-        </video>
-        <div class="media-caption">🎬 游戏实机演示视频 · 玩法展示</div>
-    </div>
-
-    <!-- 截图轮播 -->
+<a href="../../games.html" class="case-back">← 返回游戏原型</a>
+<section class="invasion-hero">
+  <div><span class="case-label">TACTICAL INFILTRATION / SOLO PROTOTYPE</span><h1>秘密入侵</h1><p class="hero-subtitle">任务完成，危机才刚刚开始。</p><p class="hero-copy">第一人称潜入与战术射击 Demo。在有限资源与敌人巡逻的压力下，潜入实验基地、执行目标，再从升级的警戒中撤离。</p><div class="case-actions"><a href="#demo" class="case-button primary">观看实机演示</a><a href="#mission" class="case-button">查看任务流程</a></div></div>
+  <figure id="demo"><video src="秘密入侵.mp4" controls preload="metadata">浏览器不支持视频播放，请<a href="秘密入侵.mp4">打开实机视频</a>。</video><figcaption><span>游戏实机演示 · 玩法展示</span><span>GAMEPLAY DEMO</span></figcaption></figure>
+</section>
+<dl class="dossier-meta"><div><dt>项目形式</dt><dd>个人项目 · 2026.02</dd></div><div><dt>开发工具</dt><dd>UE 5.6.1 / 蓝图</dd></div><div><dt>玩法方向</dt><dd>单人潜入 · 战术 FPS</dd></div><div><dt>设计重点</dt><dd>任务 · AI · 关卡 · 系统</dd></div></dl>
+<nav class="case-contents" aria-label="项目章节"><a href="#overview">项目简报</a><a href="#mission">任务循环</a><a href="#systems">系统拆解</a><a href="#level">关卡路线</a><a href="#contribution">设计与实现</a></nav>
+<ol class="mission-strip" aria-label="核心任务流程"><li><span>01 / ENTER</span><strong>潜入基地</strong></li><li><span>02 / SEARCH</span><strong>搜索资源</strong></li><li><span>03 / ENGAGE</span><strong>处理敌人</strong></li><li><span>04 / EXECUTE</span><strong>植入目标</strong></li><li><span class="alert">05 / EXTRACT</span><strong>警戒升级 · 撤离</strong></li></ol>
+<section id="overview" class="dossier-section"><header><span class="case-label">01 / BRIEFING</span><h2>项目概述</h2></header><div class="dossier-copy"><p>《秘密入侵》是一款第一人称潜入与战术射击结合的单人 Demo。玩家需要潜入敌方实验基地，在资源受限和敌人巡逻的压力下逐步推进，完成情报获取、设施破坏与撤离逃生的完整流程。</p>
+        <p >项目重点是验证一条完整的可玩闭环：潜入基地、搜索资源、处理敌人、完成核心目标、触发警戒升级，并在更高压力下撤离。</p></div></section>    <!-- 截图轮播 -->
     <div class="media-section">
         <div class="screenshot-carousel" data-carousel>
             <div class="carousel-track" data-carousel-track>
@@ -207,30 +134,20 @@
                     <img src="../../Games/秘密入侵/秘密入侵.png" alt="《秘密入侵》实机截图 1">
                 </div>
                 <div class="carousel-slide">
-                    <img src="../../Images/占位图.png" alt="占位 2">
+                    <img src="../../Images/占位图.png" alt="待补充画面 2">
                 </div>
                 <div class="carousel-slide">
-                    <img src="../../Images/占位图.png" alt="占位 3">
+                    <img src="../../Images/占位图.png" alt="待补充画面 3">
                 </div>
             </div>
             <button class="carousel-button prev" type="button" data-carousel-prev aria-label="上一张">‹</button>
             <button class="carousel-button next" type="button" data-carousel-next aria-label="下一张">›</button>
             <div class="carousel-dots" aria-label="截图页码" data-carousel-dots></div>
         </div>
-        <div class="media-caption">🖼 游戏内截图</div>
+        <div class="media-caption">项目画面 · 其余画面待补充</div>
     </div>
 
-    <!-- 项目概述 -->
-    <div class="content-block">
-        <h2>📖 项目概述</h2>
-        <p>《秘密入侵》是一款第一人称潜入与战术射击结合的单人 Demo。玩家需要潜入敌方实验基地，在资源受限和敌人巡逻的压力下逐步推进，完成情报获取、设施破坏与撤离逃生的完整流程。</p>
-        <p style="margin-top: 0.8rem;">项目重点是验证一条完整的可玩闭环：潜入基地、搜索资源、处理敌人、完成核心目标、触发警戒升级，并在更高压力下撤离。</p>
-    </div>
-
-    <!-- 项目定位 -->
-    <div class="content-block">
-        <h2>🎛 项目定位 / 技术栈</h2>
-        <div class="highlights-grid">
+<section id="positioning" class="dossier-section"><header><span class="case-label">02 / PROTOTYPE</span><h2>项目定位 / 技术栈</h2></header><div class="dossier-copy"><div class="highlights-grid">
             <div class="highlight-card">
                 <strong>UE5 蓝图原型</strong>
                 <p>使用 Unreal Engine 5.6.1 蓝图搭建，重点验证系统之间的耦合关系，而不是追求最终商业包装。</p>
@@ -243,48 +160,33 @@
                 <strong>可复用系统模板</strong>
                 <p>角色、武器、生命值、库存和交互以模块方式组织，后续可以继续扩展武器、敌人或技能组合。</p>
             </div>
-        </div>
-    </div>
-
-    <!-- 核心玩法循环 -->
-    <div class="content-block">
-        <h2>🔁 核心玩法循环</h2>
-        <ul class="info-list">
+        </div></div></section>
+<section id="mission" class="dossier-section"><header><span class="case-label">03 / MISSION FLOW</span><h2>核心玩法循环</h2></header><div class="dossier-copy"><ul class="info-list">
             <li><strong>潜入</strong>：从卸货区外进入基地，在有限视野和敌人巡逻下寻找安全推进路线。</li>
             <li><strong>搜索</strong>：通过门禁卡、武器、弹药和医疗包建立资源积累，支撑后续战斗。</li>
             <li><strong>对抗</strong>：在必要战斗中利用掩体、武器切换和技能处理敌人威胁。</li>
             <li><strong>目标执行</strong>：到达主服务器并植入程序，推动关卡状态发生变化。</li>
             <li><strong>撤离</strong>：警戒升级后敌人刷新，玩家需要在资源更紧张的情况下突破返回。</li>
-        </ul>
-    </div>
-
-    <!-- 特殊设计 -->
-    <div class="content-block">
-        <h2>✨ 特殊设计</h2>
-        <div class="highlights-grid">
+        </ul></div></section>
+<section id="design" class="dossier-section"><header><span class="case-label">04 / DESIGN DECISIONS</span><h2>特殊设计</h2></header><div class="dossier-copy"><div class="highlights-grid">
             <div class="highlight-card">
-                <strong>⚠️ 警戒状态翻转</strong>
+                <strong>警戒状态翻转</strong>
                 <p>当玩家植入目标程序后，整个基地会进入更高风险状态，敌人配置和压力同步提升，形成明确的节奏转折点。</p>
             </div>
             <div class="highlight-card">
-                <strong>🎯 资源驱动潜入</strong>
+                <strong>资源驱动潜入</strong>
                 <p>门禁卡、武器、弹药、医疗包都被纳入同一套资源管理逻辑，玩家不能只靠硬打推进。</p>
             </div>
             <div class="highlight-card">
-                <strong>🧱 模块化蓝图结构</strong>
+                <strong>模块化蓝图结构</strong>
                 <p>角色、武器、生命值、库存、交互等功能拆成可复用组件，便于后续扩展更多武器或敌人类型，或任何基于第一人称射击的游戏原型。</p>
             </div>
             <div class="highlight-card">
-                <strong>🔫 即时命中射击</strong>
+                <strong>即时命中射击</strong>
                 <p>子弹采用射线检测实现，适合当前原型阶段快速验证命中反馈、武器节奏和 AI 反应。</p>
             </div>
-        </div>
-    </div>
-
-    <!-- 系统拆解 -->
-    <div class="content-block">
-        <h2>🧩 系统拆解</h2>
-        <div class="highlights-grid">
+        </div></div></section>
+<section id="systems" class="dossier-section systems"><header><span class="case-label">05 / SYSTEM ARCHITECTURE</span><h2>系统拆解</h2></header><div class="dossier-copy"><div class="highlights-grid">
             <div class="highlight-card">
                 <strong>角色 3C</strong>
                 <p>支持移动、奔跑、跳跃、蹲伏、瞄准、开火、换弹、交互、拾取和武器切换，满足 FPS 原型的基础操作需求。</p>
@@ -301,26 +203,16 @@
                 <strong>交互与库存</strong>
                 <p>可交互物、可拾取物和可摧毁物与库存、武器和生命组件联动，让任务推进和资源消耗形成闭环。</p>
             </div>
-        </div>
-    </div>
-
-    <!-- 关卡设计 -->
-    <div class="content-block">
-        <h2>🗺 关卡设计</h2>
-        <p>关卡按照“教学 - 过渡 - 对抗 - 爆发”的顺序推进，确保玩家能逐步理解规则并被持续抬高压力。</p>
+        </div></div></section>
+<section id="level" class="dossier-section"><header><span class="case-label">06 / LEVEL ROUTE</span><h2>关卡设计</h2></header><div class="dossier-copy"><p>关卡按照“教学 - 过渡 - 对抗 - 爆发”的顺序推进，确保玩家能逐步理解规则并被持续抬高压力。</p>
         <ul class="info-list">
             <li><strong>卸货区</strong>：作为起始区域，先让玩家熟悉移动、瞄准、交互和基础战斗。</li>
             <li><strong>走廊 / 门禁段</strong>：引入门禁卡与封锁路线，开始建立“探索换通路”的目标感。</li>
             <li><strong>实验控制区</strong>：玩家在这里完成一次更明确的遭遇战，并获得补给，作为节奏回升点。</li>
             <li><strong>实验区</strong>：完成核心目标的区域，承担剧情和任务推进的主要意义。</li>
             <li><strong>撤离阶段</strong>：在警戒升级之后回撤，利用更少资源面对更多敌人，完成最后的张力释放。</li>
-        </ul>
-    </div>
-
-    <!-- 节奏设计 -->
-    <div class="content-block">
-        <h2>⏱ 节奏设计</h2>
-        <div class="highlights-grid">
+        </ul></div></section>
+<section id="pacing" class="dossier-section pacing"><header><span class="case-label">07 / PRESSURE & PACING</span><h2>节奏设计</h2></header><div class="dossier-copy"><div class="highlights-grid">
             <div class="highlight-card">
                 <strong>1. 低压进入</strong>
                 <p>开局先让玩家熟悉环境和基础交互，减少学习成本，建立“我知道自己要做什么”的清晰感。</p>
@@ -337,38 +229,20 @@
                 <strong>4. 余波收束</strong>
                 <p>撤离阶段用资源紧张和敌人刷新做收尾，让最终体验有清晰的结束感，而不是平铺直叙地收场。</p>
             </div>
-        </div>
-    </div>
-
-    <!-- 实机验证点 -->
-    <div class="content-block">
-        <h2>✅ 实机验证点</h2>
-        <ul class="info-list">
+        </div></div></section>
+<section id="validation" class="dossier-section"><header><span class="case-label">08 / IN-GAME VALIDATION</span><h2>实机验证点</h2></header><div class="dossier-copy"><ul class="info-list">
             <li>已在实机演示中呈现主菜单、第一人称视角、目标提示、血量与弹药 HUD。</li>
             <li>已呈现手枪与步枪的武器切换，以及射击、装填、弹药消耗等基础反馈。</li>
             <li>已呈现敌人站位、巡逻/战斗压力、目标推进和室内战斗场景。</li>
             <li>已呈现植入目标后的任务状态变化，能够支撑“进入 - 完成目标 - 撤离”的展示叙事。</li>
-        </ul>
-    </div>
-
-    <!-- 设计与实现 -->
-    <div class="content-block">
-        <h2>👤 设计与实现</h2>
-        <ul class="info-list">
+        </ul></div></section>
+<section id="contribution" class="dossier-section"><header><span class="case-label">09 / MY CONTRIBUTION</span><h2>设计与实现</h2></header><div class="dossier-copy"><ul class="info-list">
             <li>搭建第一人称移动、瞄准、射击、交互与拾取流程</li>
             <li>设计潜入、搜索、战斗、植入目标、撤离的完整循环</li>
             <li>实现武器、生命值、库存、交互物等可复用蓝图模块</li>
             <li>规划敌人巡逻、发现玩家、寻找掩体与攻击行为</li>
-        </ul>
-    </div>
-
-    <!-- 底部 -->
-    <div style="text-align: center; padding: 2rem 0;">
-        <a href="../../games.html" class="back-link" style="margin-bottom: 0;">← 返回游戏列表</a>
-    </div>
-</div>
-
-<script>
+        </ul></div></section>
+<footer class="case-footer"><a href="../../games.html">← 返回游戏原型</a><a href="../../index.html">返回首页 ↗</a></footer></main><script>
     document.querySelectorAll('[data-carousel]').forEach((carousel) => {
         const track = carousel.querySelector('[data-carousel-track]');
         const slides = Array.from(track.children);
@@ -400,6 +274,4 @@
         nextButton.addEventListener('click', () => updateCarousel(currentIndex + 1));
         updateCarousel(0);
     });
-</script>
-</body>
-</html>
+</script></body></html>
